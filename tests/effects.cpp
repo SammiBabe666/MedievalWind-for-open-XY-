@@ -68,11 +68,11 @@ int main() {
         require(!p.voice.echo_used && !p.voice.hall_used, "an effect at zero keeps running");
         c[6] = c[7] = 1;
         p.set(c);
-        p.play(48, 1);
+        p.play(48, 8);   // cleared an eighth a block; the effects join on the eighth
         unsigned written = 0;   // only the block just rendered may be in the line: 16 quarter-rate samples
         for (unsigned i = 0; i < medievalwind::echo_length; ++i) written += p.voice.echo[i] != 0;
         const bool cleared = written <= 16;
-        require(cleared && p.voice.echo_used && p.voice.hall_used, "an effect does not restart");
+        require(cleared && p.voice.echo_used == 8 && p.voice.hall_used == 8, "an effect does not restart");
     }
     return 0;
 }

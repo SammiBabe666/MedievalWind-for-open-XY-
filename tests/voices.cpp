@@ -36,7 +36,11 @@ int main() {
     medievalwind::initialize(p.voice, p.shared, 9);
     medievalwind::start(p.voice, p.shared, 9);
     p.play(72, 1, x);
-    require(std::fabs(x[0]) < 0.01, "a stolen voice carries its old note");
+    double first = 0;
+    for (unsigned i = 0; i < 64; ++i) first = std::fmax(first, std::fabs(x[i]));
+    bool empty = true;
+    for (unsigned i = 0; i < medievalwind::bore_length; ++i) empty = empty && std::abs(p.voice.bore[i]) < 2000;
+    require(first < steady / 2 && empty, "a stolen voice carries its old note");
     // Overlapping notes: eight voices at once, each its own state, all sounding.
     static Player chord[8];
     for (unsigned v = 0; v < 8; ++v) chord[v].begin(v + 1, c);

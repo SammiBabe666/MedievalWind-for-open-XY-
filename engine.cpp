@@ -32,7 +32,13 @@ using opxy::q31::multiply;
 
 const i32 one = 1 << 14;                     // Q14 unity
 const i32 limit = 31000;                     // |bore wave| < 1.9: fits i16
-const i32 output_peak = 0x20000000;          // definition.json outputPeakQ31
+const i32 output_peak = 0x40000000;          // definition.json outputPeakQ31: half scale, the platform's limit
+// Output: Q14 times 2^16 (a shift), the soft knee in loud() keeping it under the
+// declared peak. The makeup gain (x0.83 on top of the shift) rides on the bell's
+// coefficients, so the extra loudness costs nothing per sample.
+const i32 knee = 9830;                       // 60% of the peak, in Q14 output units
+const i32 ceiling_q14 = 16383;               // just under the peak (2^30 = 16384 << 16)
+const i32 makeup = 27197;                    // x0.83, folded into the bell's coefficients (Q15)
 const i32 half_pi = 51472;                   // Q15 radians
 
 inline i32 clamp(i32 v, i32 lo, i32 hi) { return v < lo ? lo : v > hi ? hi : v; }
@@ -100,6 +106,17 @@ inline i32 filter_lag(u32 omega_q24, i32 loss_k, i32 leak_k) {
 // 1 + cents * ln2 / 1200 (bends of the period, not the pitch: positive is flat).
 inline i32 period_bend(i32 cents_q8) { return 32768 + ((cents_q8 * 19) >> 8); }  // 2^15 ln2/1200 = 18.9
 
+// The output word: a soft knee for the bell's brief spikes (4:1 above 60% of
+// the peak), then a shift to Q31. It replaces a plain clamp: no extra multiply.
+inline i32 loud(i32 y) {
+    i32 a = y < 0 ? -y : y;
+    if (a > knee) {
+        a = knee + ((a - knee) >> 2);
+        if (a > ceiling_q14) a = ceiling_q14;
+    }
+    return (y < 0 ? -a : a) * 65536;
+}
+
 inline u32 random(u32& seed) { return seed = seed * 1664525u + 1013904223u; }
 
 inline void prepare(Voice& v, const i32* parameters, u32 increment, Block& b) {
@@ -149,7 +166,10 @@ inline void prepare(Voice& v, const i32* parameters, u32 increment, Block& b) {
     b.leak_k = clamp(static_cast<i32>((omega >> 9) * 38u >> 8), 8, 4000);  // a seventh of the fundamental
     // Their phase at the fundamental: recomputed only when the note or the filters move.
     const i32 keys = (b.loss_k << 16) | b.leak_k;
-    if (omega != v.lag_omega || keys != v.lag_keys || !v.initialized) {
+    // While the pitch glides (bends, portamento) it is refreshed every fourth block,
+    // or at once for a jump of more than 3%, so a bend never makes every block heavy.
+    const u32 moved = omega > v.lag_omega ? omega - v.lag_omega : v.lag_omega - omega;
+    if (keys != v.lag_keys || !v.initialized || moved > (v.lag_omega >> 5) || (moved && (v.age & 3) == 0)) {
         v.lag = filter_lag(omega, b.loss_k, b.leak_k);
         v.lag_omega = omega;
         v.lag_keys = keys;
@@ -202,17 +222,18 @@ inline void prepare(Voice& v, const i32* parameters, u32 increment, Block& b) {
     b.mouth = mouth << 8;                                             // Q22
     b.rise = v.age <= 8 ? 6 : v.age < 24 ? 8 : 10;                    // 1.5 ms, 6 ms, then 23 ms
     b.turbulence = mul15(breath, 13107);                              // up to 40% pressure noise
-    b.air = mul15(mul15(breath, breath), 900) + mul15(breath, 250);   // up to 0.035 of hiss
+    b.air = mul15(mul15(mul15(breath, breath), 900) + mul15(breath, 250), makeup);  // up to 0.03 of hiss
 
     // Bell: radiation. The bell passes the bore's pressure and, rising with
     // frequency, its slope: 0.4 to 8 times the difference, half that on the crumhorn.
-    b.shelf = mul15(1638 + mul15(bell, 31130), 32768 - mul15(crum, 16384));  // Q12
-    b.body = 32767 - mul15(bell, 13107);                              // 1 .. 0.6, Q15
+    // Both carry the output's makeup gain (x0.83), as do the formant and the hiss.
+    b.shelf = mul15(mul15(1638 + mul15(bell, 31130), 32768 - mul15(crum, 16384)), makeup);  // Q12
+    b.body = mul15(32767 - mul15(bell, 13107), makeup);               // (1 .. 0.6) x 0.83, Q15
     // A nasal formant: about 2.3 kHz on the shawm sliding to 1.1 kHz on the crumhorn.
     // Chamberlin coefficient 2 sin(pi f / fs): 0.326 .. 0.157.
     b.formant_f = 10690 - mul15(crum, 5530);
     b.formant_q = 16384 - mul15(crum, 6554);                          // damping 0.5 .. 0.3
-    b.formant_mix = 9830 + mul15(crum, 16384);                        // 0.3 .. 0.8
+    b.formant_mix = mul15(9830 + mul15(crum, 16384), makeup);         // (0.3 .. 0.8) x 0.83
 
     b.hall = v.control[6];
     b.echo = v.control[7];
@@ -246,6 +267,13 @@ inline void mouth_pass(Voice& v, const Block& b, i32* __restrict out) {
 
 // Pass 2: reed and bore. The reed meets the wave returning from the bore and
 // writes what it lets through back into it.
+//
+// Specialised so the loop holds only what it needs (the Blackfin has eight data
+// registers): Taps is 1 (the long tap alone: Crum 0), 2 (the short tap alone:
+// Crum full) or 3 (both); Glide is false for a steady pitch, when each tap's
+// fraction is the same for the whole block and its position only counts up.
+// Every variant computes exactly what the general one did.
+template <int Taps, bool Glide>
 inline void bore_pass(Voice& v, const Block& b, i32* __restrict io) {
     const u32 mask = bore_length - 1;
     u32 write = v.write;
@@ -254,23 +282,45 @@ inline void bore_pass(Voice& v, const Block& b, i32* __restrict io) {
     const i32 offset = b.offset, slope = b.slope;
     u32 dl = static_cast<u32>(b.tap_long), ds = static_cast<u32>(b.tap_short);
     const u32 sl = static_cast<u32>(b.step_long), ss = static_cast<u32>(b.step_short);
+    // Steady pitch: the read positions and fractions once per block.
+    u32 rl = ((write << 16) - dl) >> 16, rs = ((write << 16) - ds) >> 16;
+    const i32 fl0 = static_cast<i32>((((write << 16) - dl) >> 1) & 0x7fff);
+    const i32 fs0 = static_cast<i32>((((write << 16) - ds) >> 1) & 0x7fff);
+    i16* const bore = v.bore;
     for (unsigned i = 0; i != opxy::block_frames; ++i) {
-        // Fractional taps: linear interpolation between neighbours.
-        const u32 pl = (write << 16) - dl, ps = (write << 16) - ds;
-        dl += sl;
-        ds += ss;
-        const i32 l0 = v.bore[(pl >> 16) & mask], l1 = v.bore[((pl >> 16) + 1) & mask];
-        const i32 s0 = v.bore[(ps >> 16) & mask], s1 = v.bore[((ps >> 16) + 1) & mask];
-        const i32 fl = static_cast<i32>((pl >> 1) & 0x7fff), fs = static_cast<i32>((ps >> 1) & 0x7fff);
-        const i32 tl = l0 + mul15(l1 - l0, fl), ts = s0 + mul15(s1 - s0, fs);
-        const i32 returning = mul15(tl, gl) - mul15(ts, gs);
+        i32 returning = 0;
+        if (Glide) {
+            // Fractional taps: linear interpolation between neighbours.
+            const u32 pl = (write << 16) - dl, ps = (write << 16) - ds;
+            dl += sl;
+            ds += ss;
+            if (Taps & 1) {
+                const i32 l0 = bore[(pl >> 16) & mask], l1 = bore[((pl >> 16) + 1) & mask];
+                returning += mul15(l0 + mul15(l1 - l0, static_cast<i32>((pl >> 1) & 0x7fff)), gl);
+            }
+            if (Taps & 2) {
+                const i32 s0 = bore[(ps >> 16) & mask], s1 = bore[((ps >> 16) + 1) & mask];
+                returning -= mul15(s0 + mul15(s1 - s0, static_cast<i32>((ps >> 1) & 0x7fff)), gs);
+            }
+        } else {
+            if (Taps & 1) {
+                const i32 l0 = bore[rl & mask], l1 = bore[(rl + 1) & mask];
+                returning += mul15(l0 + mul15(l1 - l0, fl0), gl);
+                ++rl;
+            }
+            if (Taps & 2) {
+                const i32 s0 = bore[rs & mask], s1 = bore[(rs + 1) & mask];
+                returning -= mul15(s0 + mul15(s1 - s0, fs0), gs);
+                ++rs;
+            }
+        }
         low += mul15(returning - low, k);                             // bore losses
         leak += mul15(low - leak, kd);                                // no DC in the loop
         const i32 p = io[i];
         const i32 dp = clamp(low - leak - p, -40000, 40000);          // across the reed
         const i32 r = clamp(offset + ((slope * dp) >> 14), -32768, 32767);  // the reed's reflection
         const i32 j = clamp(p + ((dp * r) >> 15), -limit, limit);
-        v.bore[write & mask] = static_cast<i16>(j);
+        bore[write & mask] = static_cast<i16>(j);
         io[i] = j;
         ++write;
     }
@@ -279,129 +329,215 @@ inline void bore_pass(Voice& v, const Block& b, i32* __restrict io) {
     v.leak = leak;
 }
 
-// Pass 3: the bell. Radiation for projection, a nasal formant and the air.
-template <bool airy>
-inline void bell_pass(Voice& v, const Block& b, i32* __restrict io) {
-    i32 previous = v.tone_low, lo = v.nasal_low, band = v.nasal_band, air = v.air, dc = v.radiated_dc;
-    u32 noise = v.noise ^ 0x5bd1e995u;
-    const i32 shelf = b.shelf, body = b.body, f = b.formant_f, q = b.formant_q, mix = b.formant_mix, hiss = b.air;
-    for (unsigned i = 0; i != opxy::block_frames; ++i) {
-        const i32 x = io[i];
-        // The mouth's steady pressure stays in the instrument: a DC blocker (~7 Hz).
-        dc += x - (dc >> 10);
-        const i32 ac = x - (dc >> 10);
-        const i32 shaped = mul15(ac, body) + (((x - previous) * shelf) >> 12);
-        previous = x;
-        // Chamberlin state-variable bandpass, input halved for headroom.
-        lo += mul15(band, f);
-        const i32 high = (shaped >> 1) - lo - mul15(band, q) * 2;
-        band = clamp(band + mul15(high, f), -40000, 40000);
-        i32 y = shaped + mul15(band, mix);
-        if (airy) {
-            noise = noise * 1664525u + 1013904223u;
-            const i32 n = static_cast<i32>(noise) >> 18;              // Q14 white
-            y += mul15(n - air, hiss);                                 // its bright, airy band
-            air = n;
-        }
-        io[i] = clamp(y >> 1, -2 * one, 2 * one);
-    }
-    v.tone_low = previous;
-    v.radiated_dc = dc;
-    v.nasal_low = lo;
-    v.nasal_band = band;
-    v.air = air;
+template <int Taps>
+inline void bore_pass(Voice& v, const Block& b, i32* __restrict io) {
+    if (b.step_long | b.step_short) bore_pass<Taps, true>(v, b, io);
+    else bore_pass<Taps, false>(v, b, io);
 }
 
-// Pass 4: Echo and Hall at a quarter of the audio rate, then the output.
-// Zero on either is a true bypass: its line is neither read nor written.
-inline void space_pass(Voice& v, const Block& b, const i32* __restrict dry, opxy::Output output) {
-    const bool echo_on = b.echo > 0, hall_on = b.hall > 0;
-    if (!echo_on && !hall_on) {
-        v.wet = 0;
-        v.echo_used = v.hall_used = 0;   // the next use starts from a clean line
-        for (unsigned i = 0; i != opxy::block_frames; ++i) output[i] = dry[i] * 16384;
-        return;
-    }
-    // A line coming back into use starts silent rather than replaying an old tail.
-    if (echo_on && !v.echo_used) { for (u32 i = 0; i < echo_length; ++i) v.echo[i] = 0; v.echo_low = 0; v.echo_used = 1; }
-    if (hall_on && !v.hall_used) {
-        for (u32 i = 0; i < hall_total; ++i) v.hall[i] = 0;
-        for (u32 l = 0; l < hall_lines; ++l) v.damp[l] = 0;
-        v.hall_used = 1;
-    }
-    if (!echo_on) v.echo_used = 0;
-    if (!hall_on) v.hall_used = 0;
+inline void bore_pass(Voice& v, const Block& b, i32* __restrict io) {
+    if (b.gain_short == 0) bore_pass<1>(v, b, io);
+    else if (b.gain_long == 0) bore_pass<2>(v, b, io);
+    else bore_pass<3>(v, b, io);
+}
 
-    // Echo: feedback 0.2..0.7 through a dark lowpass, wet up to 0.55.
-    const i32 feedback = 6554 + mul15(b.echo, 16384), echo_mix = mul15(b.echo, 18022);
-    // Hall: decay gain 0.70..0.92 (about 0.7 to 3 s), damping and wet up to 0.75.
-    const i32 decay = 22938 + mul15(b.hall, 7209), hall_mix = mul15(b.hall, 24576);
+// Pass 3: the bell. Radiation for projection, a nasal formant and the air, in
+// three short loops (each holds only its own state; same arithmetic, same order).
+template <bool airy>
+inline void bell_pass(Voice& v, const Block& b, i32* __restrict io) {
+    {   // Radiation: the pressure (less its DC: the mouth's steady pressure stays in
+        // the instrument, a blocker at ~7 Hz) plus its slope.
+        i32 previous = v.tone_low, dc = v.radiated_dc;
+        const i32 shelf = b.shelf, body = b.body;
+        for (unsigned i = 0; i != opxy::block_frames; ++i) {
+            const i32 x = io[i];
+            dc += x - (dc >> 10);
+            const i32 ac = x - (dc >> 10);
+            io[i] = mul15(ac, body) + (((x - previous) * shelf) >> 12);
+            previous = x;
+        }
+        v.tone_low = previous;
+        v.radiated_dc = dc;
+    }
+    {   // The nasal formant: a Chamberlin state-variable bandpass, input halved for headroom.
+        i32 lo = v.nasal_low, band = v.nasal_band;
+        const i32 f = b.formant_f, q = b.formant_q, mix = b.formant_mix;
+        for (unsigned i = 0; i != opxy::block_frames; ++i) {
+            const i32 shaped = io[i];
+            lo += mul15(band, f);
+            const i32 high = (shaped >> 1) - lo - mul15(band, q) * 2;
+            band = clamp(band + mul15(high, f), -40000, 40000);
+            const i32 y = shaped + mul15(band, mix);
+            io[i] = airy ? y : clamp(y >> 1, -2 * one, 2 * one);
+        }
+        v.nasal_low = lo;
+        v.nasal_band = band;
+    }
+    if (airy) {   // The air: white noise's bright, airy band.
+        i32 air = v.air;
+        u32 noise = v.noise ^ 0x5bd1e995u;
+        const i32 hiss = b.air;
+        for (unsigned i = 0; i != opxy::block_frames; ++i) {
+            noise = noise * 1664525u + 1013904223u;
+            const i32 n = static_cast<i32>(noise) >> 18;              // Q14 white
+            io[i] = clamp((io[i] + mul15(n - air, hiss)) >> 1, -2 * one, 2 * one);
+            air = n;
+        }
+        v.air = air;
+    }
+}
+
+// Echo: feedback 0.2..0.7 through a dark lowpass (about 1 kHz), wet up to 0.55.
+// Adds its wet signal to wet and to signal (the hall hears the echoes).
+inline void echo_step(Voice& v, const Block& b, i32* __restrict signal, i32* __restrict wet) {
+    const i32 feedback = 6554 + mul15(b.echo, 16384), mix = mul15(b.echo, 18022);
+    i16* const line = v.echo;
+    u32 at = v.echo_write;
+    i32 low = v.echo_low;
+    for (unsigned f = 0; f != opxy::block_frames / 4; ++f) {
+        const i32 back = line[at];
+        low += mul15(back - low, 18000);
+        line[at] = static_cast<i16>(clamp(signal[f] + mul15(low, feedback), -limit, limit));
+        at = at + 1 == echo_length ? 0 : at + 1;
+        const i32 echoed = mul15(back, mix);
+        wet[f] += echoed;
+        signal[f] += echoed;
+    }
+    v.echo_write = at;
+    v.echo_low = low;
+}
+
+// One allpass diffuser (g = 0.6) over the block, in place.
+inline void diffuse(i16* __restrict line, u32 length, u32& index, i32* __restrict x) {
+    u32 at = index;
+    for (unsigned f = 0; f != opxy::block_frames / 4; ++f) {
+        const i32 a = line[at];
+        const i32 u = clamp(x[f] + mul15(a, 19661), -limit, limit);
+        line[at] = static_cast<i16>(u);
+        x[f] = a - mul15(u, 19661);
+        at = at + 1 == length ? 0 : at + 1;
+    }
+    index = at;
+}
+
+// Reads a Hall line's block of outputs, damps them into damped, and adds the
+// line's share of the wet output (its sign in the output mix) to sum.
+template <int Sign>
+inline void hall_read(const i16* __restrict line, u32 length, u32 index, i32& damp, i32 damping,
+                      i32* __restrict damped, i32* __restrict sum) {
+    u32 at = index;
+    i32 d = damp;
+    for (unsigned f = 0; f != opxy::block_frames / 4; ++f) {
+        const i32 x = line[at];
+        d += mul15(x - d, damping);
+        damped[f] = d;
+        sum[f] += Sign * x;
+        at = at + 1 == length ? 0 : at + 1;
+    }
+    damp = d;
+}
+
+// Writes a Hall line: the diffused input plus its row of the Hadamard mix of the
+// damped outputs (rows: ++++, +-+-, ++--, +--+), times the decay gain.
+template <int B, int C, int D>
+inline void hall_write(i16* __restrict line, u32 length, u32& index, const i32* __restrict in, i32 decay,
+                       const i32* __restrict d0, const i32* __restrict d1, const i32* __restrict d2,
+                       const i32* __restrict d3) {
+    u32 at = index;
+    for (unsigned f = 0; f != opxy::block_frames / 4; ++f) {
+        const i32 mixed = (d0[f] + B * d1[f] + C * d2[f] + D * d3[f]) >> 1;
+        line[at] = static_cast<i16>(clamp(in[f] + mul15(mixed, decay), -limit, limit));
+        at = at + 1 == length ? 0 : at + 1;
+    }
+    index = at;
+}
+
+// Hall: two diffusers into four lines mixed by a Hadamard matrix. Decay gain
+// 0.70..0.92 (about 0.7 to 3 s), damping in every line, wet up to 0.75.
+inline void hall_step(Voice& v, const Block& b, const i32* __restrict signal, i32* __restrict wet) {
+    const unsigned frames = opxy::block_frames / 4;
+    const i32 decay = 22938 + mul15(b.hall, 7209), mix = mul15(b.hall, 24576);
     const i32 damping = 21299 - mul15(b.hall, 6554);                  // brighter when short, darker when long
-    i32 wet = v.wet;
-    u32 ew = v.echo_write;
     i16* const l0 = v.hall;
     i16* const l1 = l0 + 293;
     i16* const l2 = l1 + 359;
     i16* const l3 = l2 + 431;
-    i16* const d0 = l3 + 499;
-    i16* const d1 = d0 + 61;
-    u32 at0 = v.hall_index[0], at1 = v.hall_index[1], at2 = v.hall_index[2], at3 = v.hall_index[3];
-    u32 at4 = v.hall_index[4], at5 = v.hall_index[5];
-    i32 damp0 = v.damp[0], damp1 = v.damp[1], damp2 = v.damp[2], damp3 = v.damp[3];
-    for (unsigned f = 0; f != opxy::block_frames / 4; ++f) {
-        const i32 x = (dry[4 * f] + dry[4 * f + 1] + dry[4 * f + 2] + dry[4 * f + 3]) >> 2;
-        i32 echoed = 0, signal = x;
-        if (echo_on) {
-            const i32 back = v.echo[ew];
-            v.echo_low += mul15(back - v.echo_low, 18000);             // about 1 kHz
-            v.echo[ew] = static_cast<i16>(clamp(x + mul15(v.echo_low, feedback), -limit, limit));
-            ew = ew + 1 == echo_length ? 0 : ew + 1;
-            echoed = mul15(back, echo_mix);
-            signal += echoed;
+    i16* const a0 = l3 + 499;
+    i16* const a1 = a0 + 61;
+    i32 in[frames], sum[frames], d0[frames], d1[frames], d2[frames], d3[frames];
+    for (unsigned f = 0; f != frames; ++f) { in[f] = signal[f] >> 1; sum[f] = 0; }
+    diffuse(a0, 61, v.hall_index[4], in);
+    diffuse(a1, 97, v.hall_index[5], in);
+    hall_read<1>(l0, 293, v.hall_index[0], v.damp[0], damping, d0, sum);
+    hall_read<1>(l1, 359, v.hall_index[1], v.damp[1], damping, d1, sum);
+    hall_read<-1>(l2, 431, v.hall_index[2], v.damp[2], damping, d2, sum);
+    hall_read<1>(l3, 499, v.hall_index[3], v.damp[3], damping, d3, sum);
+    hall_write<1, 1, 1>(l0, 293, v.hall_index[0], in, decay, d0, d1, d2, d3);     // s + u
+    hall_write<-1, 1, -1>(l1, 359, v.hall_index[1], in, decay, d0, d1, d2, d3);   // t + w
+    hall_write<1, -1, -1>(l2, 431, v.hall_index[2], in, decay, d0, d1, d2, d3);   // s - u
+    hall_write<-1, -1, 1>(l3, 499, v.hall_index[3], in, decay, d0, d1, d2, d3);   // t - w
+    for (unsigned f = 0; f != frames; ++f) wet[f] += mul15(sum[f] >> 1, mix);
+}
+
+// Pass 4: Echo and Hall at a quarter of the audio rate, then the output.
+// Zero on either is a true bypass: its line is neither read nor written.
+const u32 clear_steps = 8;
+inline void space_pass(Voice& v, const Block& b, const i32* __restrict dry, opxy::Output output) {
+    // A line coming into use starts silent rather than replaying an old tail. It is
+    // cleared an eighth per block (at most 602 words a block, never the whole line at
+    // once) and the effect joins when it is clean: 11.6 ms after it is turned up.
+    if (b.echo > 0) {
+        if (v.echo_used < clear_steps) {
+            const u32 from = v.echo_used * (echo_length / clear_steps);
+            for (u32 i = from; i < from + echo_length / clear_steps; ++i) v.echo[i] = 0;
+            v.echo_low = 0;
+            ++v.echo_used;
         }
-        i32 halled = 0;
-        if (hall_on) {
-            // Two diffusers (allpass, g = 0.6), then four lines mixed by a Hadamard matrix.
-            i32 in = signal >> 1;
-            const i32 a0 = d0[at4];
-            const i32 u0 = clamp(in + mul15(a0, 19661), -limit, limit);
-            d0[at4] = static_cast<i16>(u0);
-            in = a0 - mul15(u0, 19661);
-            const i32 a1 = d1[at5];
-            const i32 u1 = clamp(in + mul15(a1, 19661), -limit, limit);
-            d1[at5] = static_cast<i16>(u1);
-            in = a1 - mul15(u1, 19661);
-            const i32 x0 = l0[at0], x1 = l1[at1], x2 = l2[at2], x3 = l3[at3];
-            damp0 += mul15(x0 - damp0, damping);
-            damp1 += mul15(x1 - damp1, damping);
-            damp2 += mul15(x2 - damp2, damping);
-            damp3 += mul15(x3 - damp3, damping);
-            const i32 s = damp0 + damp1, t = damp0 - damp1, u = damp2 + damp3, w = damp2 - damp3;
-            l0[at0] = static_cast<i16>(clamp(in + mul15((s + u) >> 1, decay), -limit, limit));
-            l1[at1] = static_cast<i16>(clamp(in + mul15((t + w) >> 1, decay), -limit, limit));
-            l2[at2] = static_cast<i16>(clamp(in + mul15((s - u) >> 1, decay), -limit, limit));
-            l3[at3] = static_cast<i16>(clamp(in + mul15((t - w) >> 1, decay), -limit, limit));
-            at0 = at0 + 1 == 293u ? 0 : at0 + 1;
-            at1 = at1 + 1 == 359u ? 0 : at1 + 1;
-            at2 = at2 + 1 == 431u ? 0 : at2 + 1;
-            at3 = at3 + 1 == 499u ? 0 : at3 + 1;
-            at4 = at4 + 1 == 61u ? 0 : at4 + 1;
-            at5 = at5 + 1 == 97u ? 0 : at5 + 1;
-            halled = mul15((x0 + x1 - x2 + x3) >> 1, hall_mix);
+    } else {
+        v.echo_used = 0;
+    }
+    if (b.hall > 0) {
+        if (v.hall_used < clear_steps) {
+            const u32 chunk = (hall_total + clear_steps - 1) / clear_steps;
+            const u32 from = v.hall_used * chunk, to = from + chunk < hall_total ? from + chunk : hall_total;
+            for (u32 i = from; i < to; ++i) v.hall[i] = 0;
+            for (u32 l = 0; l < hall_lines; ++l) v.damp[l] = 0;
+            ++v.hall_used;
         }
-        const i32 now = echoed + halled;
-        // Back to the audio rate: a straight line from the previous wet sample.
+    } else {
+        v.hall_used = 0;
+    }
+    const bool echo_on = v.echo_used == clear_steps, hall_on = v.hall_used == clear_steps;
+    if (!echo_on && !hall_on) {
+        v.wet = 0;
+        for (unsigned i = 0; i != opxy::block_frames; ++i) output[i] = loud(dry[i]);
+        return;
+    }
+
+    const unsigned frames = opxy::block_frames / 4;
+    // Each step below is its own short loop over the block's 16 quarter-rate
+    // frames, holding only its own state: one loop doing everything at once kept
+    // too many values for the Blackfin's registers. Every line is longer than a
+    // block, so a block's reads never see its own writes: the result is exactly
+    // that of the frame-by-frame loop.
+    i32 signal[frames], wet_now[frames];
+    for (unsigned f = 0; f != frames; ++f) {
+        signal[f] = (dry[4 * f] + dry[4 * f + 1] + dry[4 * f + 2] + dry[4 * f + 3]) >> 2;
+        wet_now[f] = 0;
+    }
+    if (echo_on) echo_step(v, b, signal, wet_now);
+    if (hall_on) hall_step(v, b, signal, wet_now);
+    // Back to the audio rate: a straight line from the previous wet sample.
+    i32 wet = v.wet;
+    for (unsigned f = 0; f != frames; ++f) {
+        const i32 now = wet_now[f];
         for (unsigned k = 0; k != 4; ++k) {
             const i32 y = dry[4 * f + k] + wet + (((now - wet) * static_cast<i32>(k + 1)) >> 2);
-            output[4 * f + k] = clamp(y, -2 * one, 2 * one) * 16384;
+            output[4 * f + k] = loud(y);
         }
         wet = now;
     }
     v.wet = wet;
-    v.echo_write = ew;
-    v.hall_index[0] = at0; v.hall_index[1] = at1; v.hall_index[2] = at2; v.hall_index[3] = at3;
-    v.hall_index[4] = at4; v.hall_index[5] = at5;
-    v.damp[0] = damp0; v.damp[1] = damp1; v.damp[2] = damp2; v.damp[3] = damp3;
 }
 } // namespace
 

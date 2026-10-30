@@ -43,7 +43,7 @@ struct Voice {
     u32 vibrato_phase;           // Bend: the player's vibrato
     u32 age;                     // blocks since the note started, saturating
     i32 scoop;                   // Bend: attack pitch scoop, Q15 of full depth
-    u32 echo_used, hall_used;    // effect lines hold signal since they were last cleared
+    u32 echo_used, hall_used;    // blocks of clearing done (8: the line is clean and in use)
     u32 lag_omega;               // filter_lag's inputs last block, so a steady note skips it
     i32 lag_keys, lag;
     u32 seed;

@@ -12,7 +12,7 @@ static inline void require(bool ok, const char* message) {
     }
 }
 
-static const int peak = 536870912;  // definition.json outputPeakQ31
+static const int peak = 1073741824;  // definition.json outputPeakQ31
 
 // Q31 control word for a normalised value.
 static inline int q31(double value) { return static_cast<int>(std::lrint(value * 2147483647.0)); }

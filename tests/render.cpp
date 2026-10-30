@@ -38,6 +38,6 @@ int main() {
         }
     }
     std::printf("render hash 0x%08x\n", hash);
-    require(hash == 0xb2891dc5u, "render output changed");
+    require(hash == 0x6fc11dc5u, "render output changed");
     return 0;
 }
