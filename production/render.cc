@@ -3,7 +3,7 @@
 // envelope with a short attack and an exponential release; no stock filter or FX.
 //
 //   g++ -std=c++11 -O2 -I../open-xy/sdk/include -I. production/render.cc -o render
-//   ./render score.txt out.wav
+//   ./render score.txt out.wav [gain]
 //
 // Score lines (seconds, MIDI note, eight controls 0..1):
 //   note <start> <length> <midi> <reed> <bore> <bell> <breath> <bend> <crum> <hall> <echo> [ramp <index> <to>]
@@ -19,7 +19,8 @@
 struct Note { double start, length, midi; double values[8]; int ramp; double to; double release; };
 
 int main(int argc, char** argv) {
-    if (argc < 3) { std::fprintf(stderr, "usage: render score.txt out.wav\n"); return 2; }
+    if (argc < 3) { std::fprintf(stderr, "usage: render score.txt out.wav [gain]\n"); return 2; }
+    const double gain = argc > 3 ? std::atof(argv[3]) : 2.2;
     std::FILE* in = std::fopen(argv[1], "r");
     if (!in) { std::perror(argv[1]); return 2; }
     std::vector<Note> notes;
@@ -79,7 +80,10 @@ int main(int argc, char** argv) {
             }
         }
     }
-    // Normalise gently: the engine peaks at a quarter of full scale.
+    // Gain: the engine peaks at a quarter of full scale; mixes of notes add.
+    float top = 0;
+    for (size_t i = 0; i < mix.size(); ++i) top = std::fmax(top, std::fabs(mix[i]));
+    std::printf("peak before gain %.4f\n", top);
     std::FILE* out = std::fopen(argv[2], "wb");
     if (!out) { std::perror(argv[2]); return 2; }
     const unsigned count = static_cast<unsigned>(mix.size()), bytes = count * 2;
@@ -91,7 +95,7 @@ int main(int argc, char** argv) {
     for (int i = 0; i < 4; ++i) { h[4 + i] = (riff >> (8 * i)) & 255; h[40 + i] = (bytes >> (8 * i)) & 255; }
     std::fwrite(h, 1, 44, out);
     for (unsigned i = 0; i < count; ++i) {
-        const double v = std::fmax(-1.0, std::fmin(1.0, mix[i] * 2.2));
+        const double v = std::fmax(-1.0, std::fmin(1.0, mix[i] * gain));
         const short s = static_cast<short>(std::lrint(v * 32767));
         std::fwrite(&s, 2, 1, out);
     }

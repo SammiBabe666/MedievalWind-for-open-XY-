@@ -10,9 +10,20 @@ every control redraws.
 Everything is synthesised in real time in fixed point. There are no samples,
 wavetables or recordings anywhere in the engine.
 
+![Medieval Wind](media/hero.png)
+
+▶ **[Sound and screen tour (MP4, 3 min)](media/medievalwind-tour.mp4)**: every
+control swept, then every preset. Sound is `engine.cpp` rendered offline; the
+screen is `display.cpp` drawn by the SDK's own renderer. Nothing in it was
+filmed on a device.
+
+![The screen](media/screen.png)
+
 **Status: host-tested, not yet verified on an OP-XY.** The preview, all host
-tests and sanitizer runs pass. No hardware audition or CPU readout exists yet;
-[tools/mac](tools/mac) builds the test firmware and measures it.
+tests and sanitizer runs pass, and CI compiles it with the SDK's pinned
+Blackfin tools. No hardware audition or CPU readout exists yet: a profiling
+test OS has been built (commit `5de4454`) and [tools/mac](tools/mac) builds and
+measures one on a Mac.
 
 ## Controls
 
@@ -184,9 +195,26 @@ g++ -std=c++11 -O2 -I../open-xy/sdk/include -I. production/render.cc -o render
 | [presets/](presets) | Generated device presets and their manifest |
 | [generators/](generators) | Regenerate presets and artwork |
 | [tests/](tests) | Host tests and release checks |
-| [production/](production) | Offline renderer, screen capture and the demo |
+| [production/](production) | Offline renderer, hero artwork, screen capture and the tour |
+| [media/](media) | Hero image, screen capture, tour video and poster |
 | [tools/](tools) | Hardware CPU test: Mac kit and profiling-build scripts |
 | [AUDIT.md](AUDIT.md) | Design, validation record and what remains |
+
+## Media
+
+Everything in [media/](media) is made by scripts from this repository's code
+(Python 3 with Pillow and NumPy, Node 22 with Playwright's Chromium, g++,
+ffmpeg with libx264 and aac, the Inter fonts):
+
+```sh
+export NODE_PATH=$(npm root -g)
+python production/hero.py hero.svg && node production/render_svg.mjs hero.svg hero.png   # then 1280 x 640 as media/hero.png
+python production/make_tour.py --sdk ../open-xy --work ../mw-tour-work                   # tour, poster, screen.png (~6 min)
+```
+
+The tour's amp envelope is the script's own stand-in (stock time values read
+as `8 × (v/32767)²` seconds), one gain sets the whole film's peak to −1 dBFS,
+and the header uses the browser's fonts in place of the device's.
 
 ## Install
 
