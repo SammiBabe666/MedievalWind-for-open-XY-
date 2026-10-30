@@ -1,0 +1,8 @@
+{
+  "schema": 1,
+  "sdk": "1.6",
+  "kind": "synth",
+  "description": "Medieval Wind: a modelled medieval double reed. A reed blows into a two-tap waveguide bore that turns a shawm into a crumhorn, with hall and echo.",
+  "presets": "presets",
+  "icon": "M3 22L30 19L30 29L3 26Z M30 19L42 12L42 36L30 29 M6 17L6 31"
+}

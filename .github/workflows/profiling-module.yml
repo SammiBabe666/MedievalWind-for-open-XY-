@@ -1,0 +1,54 @@
+name: Profiling module
+# Compiles Medieval Wind with the SDK's pinned Blackfin tools and the CPU
+# profiling sweep on, and publishes the module: no firmware is used or produced.
+# tools/profiling/finish_package.py patches the owner's stock OS with it on
+# their own computer (tools/profiling/README.md).
+on:
+  workflow_dispatch:
+permissions:
+  contents: write  # publishes the module (compiled code only) to the profiling-module branch
+env:
+  SDK_REF: 8d4bb49de8a2d72453f0ca247fecbb0aeb0daf27
+jobs:
+  module:
+    runs-on: windows-latest
+    steps:
+      - name: Keep line endings (source hashes must match other hosts)
+        run: git config --global core.autocrlf false
+      - uses: actions/checkout@v4
+        with:
+          path: medievalwind
+      - uses: actions/checkout@v4
+        with:
+          repository: etcetc000/open-xy
+          ref: ${{ env.SDK_REF }}
+          path: sdk
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Pinned Blackfin tools
+        working-directory: sdk
+        run: python sdk.py toolchain fetch
+      - name: Compile the profiling module
+        shell: bash
+        run: python medievalwind/tools/profiling/compile_module.py sdk "${{ runner.temp }}/profiling-module" medievalwind
+      - name: Record commits
+        shell: bash
+        run: |
+          {
+            echo "medievalwind $(git -C medievalwind rev-parse HEAD)"
+            echo "sdk $(git -C sdk rev-parse HEAD)"
+          } > "${{ runner.temp }}/profiling-module/commits.txt"
+          cat "${{ runner.temp }}/profiling-module/commits.txt"
+      - name: Publish the module to the profiling-module branch
+        shell: bash
+        run: |
+          out="${{ runner.temp }}/profiling-module"
+          cd "$out"
+          git init -q -b profiling-module
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          printf '%s\n' "Compiled with the SDK's pinned tools by run ${{ github.run_id }}. Code only: no firmware." > README.txt
+          git add -A
+          git commit -q -m "Profiling module from run ${{ github.run_id }} ($(head -1 commits.txt))"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" profiling-module

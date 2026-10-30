@@ -1,0 +1,68 @@
+name: Machine checks
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+env:
+  # The SDK commit Medieval Wind is validated against: staging at release 0.0.3
+  # (OS 1.2.1, machine format SDK 1.6), the same commit Fujara's hardware kit pins.
+  SDK_REF: 8d4bb49de8a2d72453f0ca247fecbb0aeb0daf27
+jobs:
+  preview-and-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: machine
+      - uses: actions/checkout@v4
+        with:
+          repository: etcetc000/open-xy
+          ref: ${{ env.SDK_REF }}
+          path: sdk
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Preview and host tools
+        run: |
+          sudo apt-get update && sudo apt-get install -y clang lld
+          python -m pip install numpy==2.3.5
+      - name: Generated files are current
+        working-directory: machine
+        run: |
+          python generators/presets.py . && python generators/panel.py . && git diff --exit-code
+      - name: Release checks (controls, presets, generators, no firmware)
+        working-directory: machine
+        run: python tests/check_release.py .
+      - name: Machine source, preview and sound checks
+        run: python sdk/sdk.py test --machine machine --cxx clang++ --host-cxx g++
+      - name: Undefined behaviour and address checks
+        run: |
+          for source in machine/tests/*.cpp; do
+            echo "$source"
+            g++ -std=c++11 -O1 -fsanitize=undefined,address -fno-sanitize-recover=all -Wall -Wextra -Werror \
+              -Isdk/sdk/include -Imachine "$source" -o "$RUNNER_TEMP/check"
+            "$RUNNER_TEMP/check"
+          done
+  blackfin:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: machine
+      - uses: actions/checkout@v4
+        with:
+          repository: etcetc000/open-xy
+          ref: ${{ env.SDK_REF }}
+          path: sdk
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Pinned Blackfin tools
+        run: python sdk/sdk.py toolchain fetch
+      - name: Native compile (no stock firmware or device)
+        run: python sdk/sdk.py compile --machine machine --out "${{ runner.temp }}/medievalwind-module"

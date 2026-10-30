@@ -1,0 +1,218 @@
+{
+  "schema": 1,
+  "id": "medievalwind",
+  "name": "Medieval Wind",
+  "parameters": [
+    {
+      "id": "reed",
+      "label": "Reed",
+      "default": 0.55,
+      "mapping": {
+        "kind": "linear",
+        "minimum": 0,
+        "maximum": 1
+      },
+      "display": "percent"
+    },
+    {
+      "id": "bore",
+      "label": "Bore",
+      "default": 0.6,
+      "mapping": {
+        "kind": "linear",
+        "minimum": 0,
+        "maximum": 1
+      },
+      "display": "percent"
+    },
+    {
+      "id": "bell",
+      "label": "Bell",
+      "default": 0.7,
+      "mapping": {
+        "kind": "linear",
+        "minimum": 0,
+        "maximum": 1
+      },
+      "display": "percent"
+    },
+    {
+      "id": "breath",
+      "label": "Breath",
+      "default": 0.1,
+      "mapping": {
+        "kind": "linear",
+        "minimum": 0,
+        "maximum": 1
+      },
+      "display": "percent"
+    },
+    {
+      "id": "bend",
+      "label": "Bend",
+      "control": 0,
+      "default": 0.0,
+      "mapping": {
+        "kind": "linear",
+        "minimum": 0,
+        "maximum": 1
+      },
+      "display": "percent"
+    },
+    {
+      "id": "crum",
+      "label": "Crum",
+      "control": 1,
+      "default": 0.0,
+      "mapping": {
+        "kind": "linear",
+        "minimum": 0,
+        "maximum": 1
+      },
+      "display": "percent"
+    },
+    {
+      "id": "hall",
+      "label": "Hall",
+      "control": 2,
+      "default": 0.0,
+      "mapping": {
+        "kind": "linear",
+        "minimum": 0,
+        "maximum": 1
+      },
+      "display": "percent"
+    },
+    {
+      "id": "echo",
+      "label": "Echo",
+      "control": 3,
+      "default": 0.0,
+      "mapping": {
+        "kind": "linear",
+        "minimum": 0,
+        "maximum": 1
+      },
+      "display": "percent"
+    }
+  ],
+  "presets": {
+    "Court Shawm": {
+      "reed": 0.55,
+      "bore": 0.6,
+      "bell": 0.7,
+      "breath": 0.1,
+      "bend": 0.0,
+      "crum": 0.0,
+      "hall": 0.0,
+      "echo": 0.0
+    },
+    "Blackwood": {
+      "reed": 0.4,
+      "bore": 0.45,
+      "bell": 0.12,
+      "breath": 0.15,
+      "bend": 0.1,
+      "crum": 0.2,
+      "hall": 0.15,
+      "echo": 0.0
+    },
+    "Hollow Procession": {
+      "reed": 0.9,
+      "bore": 0.85,
+      "bell": 0.95,
+      "breath": 0.1,
+      "bend": 0.05,
+      "crum": 0.0,
+      "hall": 0.3,
+      "echo": 0.25
+    },
+    "Chapel Reed": {
+      "reed": 0.5,
+      "bore": 0.7,
+      "bell": 0.5,
+      "breath": 0.2,
+      "bend": 0.3,
+      "crum": 0.15,
+      "hall": 0.8,
+      "echo": 0.0
+    },
+    "The Crumhorn": {
+      "reed": 0.7,
+      "bore": 0.6,
+      "bell": 0.3,
+      "breath": 0.05,
+      "bend": 0.0,
+      "crum": 1.0,
+      "hall": 0.1,
+      "echo": 0.0
+    },
+    "The Kings Fool": {
+      "reed": 1.0,
+      "bore": 0.5,
+      "bell": 0.8,
+      "breath": 0.3,
+      "bend": 0.75,
+      "crum": 0.45,
+      "hall": 0.1,
+      "echo": 0.3
+    },
+    "Moth in the Belfry": {
+      "reed": 0.2,
+      "bore": 0.35,
+      "bell": 0.35,
+      "breath": 0.85,
+      "bend": 0.5,
+      "crum": 0.55,
+      "hall": 0.75,
+      "echo": 0.45
+    },
+    "The Black Court": {
+      "reed": 0.85,
+      "bore": 1.0,
+      "bell": 0.25,
+      "breath": 0.25,
+      "bend": 0.2,
+      "crum": 0.75,
+      "hall": 0.55,
+      "echo": 0.2
+    },
+    "Pilgrims Drone": {
+      "reed": 0.35,
+      "bore": 0.8,
+      "bell": 0.2,
+      "breath": 0.3,
+      "bend": 0.1,
+      "crum": 0.65,
+      "hall": 0.45,
+      "echo": 0.0
+    },
+    "Last Light Through Stone": {
+      "reed": 0.45,
+      "bore": 0.55,
+      "bell": 0.45,
+      "breath": 0.6,
+      "bend": 0.6,
+      "crum": 0.3,
+      "hall": 1.0,
+      "echo": 0.55
+    }
+  },
+  "resources": {
+    "voiceBytes": 11860,
+    "voiceAlignment": 4,
+    "voiceCapacity": 8,
+    "sharedBytes": 0,
+    "outputPeakQ31": 536870912,
+    "display": {
+      "stateBytes": 64,
+      "stateAlignment": 4,
+      "paths": 4,
+      "points": 64,
+      "nodes": 58,
+      "texts": 16,
+      "palette": 16
+    }
+  },
+  "press": "page"
+}
