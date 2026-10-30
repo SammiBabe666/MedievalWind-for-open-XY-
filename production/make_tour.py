@@ -54,52 +54,72 @@ def phrase(notes, bpm, start=0.0, gate=0.88):
     return out
 
 
-DANCE = [(69, 1), (67, .5), (65, .5), (64, 1), (62, 1), (64, .5), (65, .5), (67, 1), (69, 2), (72, 1), (71, .5), (69, .5),
-         (67, 1), (69, 3)]
-LAMENT = [(62, 2), (65, 1), (64, 1), (62, 2), (60, 1), (57, 3), (58, 1), (60, 1), (62, 4)]
-PROCESSION = [(55, 1), (55, .5), (57, .5), (59, 1), (62, 1), (60, 1), (59, 1), (57, 2), (55, 1), (62, 1), (67, 2), (62, 3)]
-TENOR = [(55, 1), (57, 1), (58, 1), (60, 1), (62, 2), (60, 1), (58, 1), (57, 2), (55, 3)]
-JIG = [(67, .5), (69, .5), (71, .5), (72, 1), (71, .5), (69, .5), (67, .5), (66, .5), (67, 1), (0, .5), (74, .5), (72, .5),
-       (71, .5), (69, 1), (67, .5), (69, .5), (67, 2)]
-SLOW = [(64, 3), (62, 1), (60, 2), (59, 2), (57, 4), (60, 2), (59, 2), (57, 4)]
+# The song: after "Veni, veni, Emmanuel", the 15th-century French Franciscan
+# processional (public domain), in E Dorian/Aeolian, phrase by phrase. The whole
+# tour plays it through, each segment taking the next phrase.
+SONG = [
+    [(64, 1), (67, 1), (71, 1), (71, 1), (71, 1), (69, 1), (72, 1), (71, 1), (69, 1), (67, 3)],   # O come, O come, Emmanuel
+    [(69, 1), (71, 1), (67, 1), (64, 1), (67, 1), (69, 1), (66, 1), (64, 1), (62, 1), (64, 3)],   # and ransom captive Israel
+    [(67, 1), (69, 1), (71, 1), (71, 1), (71, 1), (69, 1), (72, 1), (71, 1), (69, 1), (67, 3)],   # that mourns in lonely exile here
+    [(69, 1), (71, 1), (67, 1), (64, 1), (67, 1), (69, 1), (66, 1), (64, 1), (62, 1), (64, 3)],   # until the Son of God appear
+    [(74, 1), (74, 3), (71, 1), (71, 1), (71, 1), (69, 1), (67, 1), (69, 3)],                     # Rejoice! Rejoice! Emmanuel
+    [(67, 1), (69, 1), (71, 1), (67, 1), (64, 1), (67, 1), (69, 1), (66, 1), (64, 1), (62, 1), (64, 3)],  # shall come to thee, O Israel
+]
+cursor = [0]
+
+
+def song(length, bpm, octave=0, start=0.4):
+    """The next phrases of the song that fit in a segment of `length` seconds."""
+    notes, t = [], start
+    while True:
+        line = SONG[cursor[0] % len(SONG)]
+        beats = sum(b for _, b in line)
+        if notes and t + beats * 60 / bpm > length - 0.6:
+            break
+        notes += phrase([(m + octave, b) for m, b in line], bpm, t)
+        t += beats * 60 / bpm + 0.25
+        cursor[0] += 1
+        if t + 4 * 60 / bpm > length - 0.6:
+            break
+    return notes
+
 
 # ------------------------------------------------------------------ the score
 # Segments: kind, title, text, length (s), base controls, sweep (index, from, to) or None, notes, page, release.
 segments = []
 CS = PRESETS['Court Shawm']
-segments.append(('intro', 'Medieval Wind', 'A modelled shawm that turns into a crumhorn, for the OP-XY',
-                 9.0, CS, None, phrase(DANCE, 132, 0.6), 0, 'Court Shawm'))
+segments.append(('intro', 'Medieval Wind', 'Developed for Open-XY  ·  a modelled shawm that turns into a crumhorn',
+                 9.0, CS, None, song(9.0, 112, 0, 0.8), 0, 'Court Shawm'))
 CONTROL_TEXT = [
-    ('Reed', 'Reed stiffness: soft and round, to stiff, beating and buzzing.', 0, 1, PROCESSION, 104),
-    ('Bore', 'How resonant the bore is: damped, to ringing with every mode.', 0, 1, LAMENT, 96),
-    ('Bell', 'Projection: muffled wood, to a piercing, radiating bell.', 0, 1, DANCE, 132),
-    ('Breath', 'Air turbulence in the blowing pressure, and its hiss.', 0, 1, LAMENT, 96),
-    ('Bend', 'The player: a wander, a vibrato that blooms, a scoop into each note.', 0, 1, SLOW, 92),
-    ('Crum', 'Shawm to crumhorn: the bore closes, the even harmonics fall away. Same pitch.', 0, 1, TENOR, 84),
-    ('Hall', 'A stone hall inside the voice, from off to a three-second decay.', 0, 1, LAMENT, 100),
-    ('Echo', 'A dark echo at 278.6 ms, more and longer as it turns up.', 0, 1, PROCESSION, 104),
+    ('Reed', 'Reed stiffness: soft and round, to stiff, beating and buzzing.'),
+    ('Bore', 'How resonant the bore is: damped, to ringing with every mode.'),
+    ('Bell', 'Projection: muffled wood, to a piercing, radiating bell.'),
+    ('Breath', 'Air turbulence in the blowing pressure, and its hiss.'),
+    ('Bend', 'The player: a wander, a vibrato that blooms, a scoop into each note.'),
+    ('Crum', 'Shawm to crumhorn: the bore closes, the even harmonics fall away. Same pitch.'),
+    ('Hall', 'A stone hall inside the voice, from off to a three-second decay.'),
+    ('Echo', 'A dark echo at 278.6 ms, more and longer as it turns up.'),
 ]
-for k, (name, text, a, b, notes, bpm) in enumerate(CONTROL_TEXT):
+for k, (name, text) in enumerate(CONTROL_TEXT):
     base = list(CS)
     if name in ('Hall', 'Echo'):
         base[3] = 0.15
-    segments.append(('control', name, text, 8.5, base, (k, a, b), phrase(notes, bpm, 0.3), 1 if k >= 4 else 0,
+    segments.append(('control', name, text, 8.5, base, (k, 0, 1), song(8.5, 108, -12 if name == 'Crum' else 0, 0.3), 1 if k >= 4 else 0,
                      'Chapel Reed' if name in ('Hall', 'Echo') else 'Court Shawm'))
-PRESET_PHRASES = {
-    'Court Shawm': (DANCE, 132), 'Blackwood': (LAMENT, 92), 'Hollow Procession': (PROCESSION, 100),
-    'Chapel Reed': (SLOW, 88), 'The Crumhorn': (TENOR, 112), 'The Kings Fool': (JIG, 150),
-    'Moth in the Belfry': (SLOW, 80), 'The Black Court': (PROCESSION, 84), 'Pilgrims Drone': (LAMENT, 76),
-    'Last Light Through Stone': (SLOW, 84),
+# Tempo and octave for each preset: the tenors and the drones sit an octave down.
+PRESET_PLAY = {
+    'Court Shawm': (112, 0), 'Blackwood': (96, -12), 'Hollow Procession': (100, 0), 'Chapel Reed': (84, 0),
+    'The Crumhorn': (112, -12), 'The Kings Fool': (138, 0), 'Moth in the Belfry': (80, 0), 'The Black Court': (88, -12),
+    'Pilgrims Drone': (84, 0), 'Last Light Through Stone': (84, 0),
 }
+DRONES = {'Pilgrims Drone': 52, 'The Black Court': 40, 'Hollow Procession': 52}   # E3, E2, E3 held beneath
 for name, values in PRESETS.items():
-    notes, bpm = PRESET_PHRASES[name]
-    played = phrase(notes, bpm, 0.4)
-    if name == 'Pilgrims Drone':
-        played = [(0.3, 9.6, 50)] + [(t, d, m) for t, d, m in played]
-    if name == 'The Black Court':
-        played += [(0.4, 9.0, 43)]
+    bpm, octave = PRESET_PLAY[name]
+    played = song(10.5, bpm, octave)
+    if name in DRONES:
+        played = [(0.3, 9.8, DRONES[name])] + played
     segments.append(('preset', SHOWN.get(name, name), CHARACTER[name], 10.5, values, None, played, 0, name))
-segments.append(('outro', 'Medieval Wind', 'github.com/SammiBabe666/MedievalWind-for-open-XY-', 6.0, CS, None, [], 0, 'Court Shawm'))
+segments.append(('outro', 'Medieval Wind', 'Developed for Open-XY  ·  github.com/SammiBabe666/MedievalWind-for-open-XY-', 7.0, CS, None, [], 0, 'Court Shawm'))
 TOTAL = sum(s[3] for s in segments)
 
 
@@ -216,8 +236,9 @@ def compose(work, frames):
     print('4. compose and encode')
     hero = Image.open(ROOT / 'media/hero.png').convert('RGB').resize((W, W // 2), Image.LANCZOS)
     big, mid, small, tiny = font(84), font(40), font(30, 'Light', False), font(22, 'Light', False)
-    footer = ('Sound: engine.cpp rendered offline, one voice per note, simple amp envelope.   '
-              'Screen: display.cpp in the Open-XY SDK renderer.   Not filmed on a device.')
+    footer = ('Music: after \u201cVeni, veni, Emmanuel\u201d, a 15th-century processional.',
+              'Sound: engine.cpp rendered offline, simple amp envelope.   Screen: display.cpp in the Open-XY SDK renderer.   '
+              'Not filmed on a device.')
     bounds, start = [], 0.0
     for seg in segments:
         bounds.append((start, start + seg[3], seg))
@@ -262,7 +283,11 @@ def compose(work, frames):
                 d.ellipse((x - 8, y - 8, x + 8, y + 8), fill=(235, 235, 235))
             if title == 'Court Shawm' and poster is None and t - a > 4:
                 poster = img.copy()
-        d.text((W // 2, 1040), footer, font=tiny, fill=(95, 95, 95), anchor='mm')
+        d.text((W // 2, 1028), footer[0], font=tiny, fill=(120, 120, 120), anchor='mm')
+        d.text((W // 2, 1058), footer[1], font=tiny, fill=(95, 95, 95), anchor='mm')
+        if kind not in ('intro', 'outro'):
+            d.text((60, 52), 'MEDIEVAL WIND', font=tiny, fill=(170, 170, 170), anchor='lm')
+            d.text((60, 82), 'Developed for Open-XY', font=tiny, fill=(110, 110, 110), anchor='lm')
         try:
             encoder.stdin.write(img.tobytes())
         except BrokenPipeError:

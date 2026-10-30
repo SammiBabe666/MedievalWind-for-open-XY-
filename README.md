@@ -13,9 +13,10 @@ wavetables or recordings anywhere in the engine.
 ![Medieval Wind](media/hero.png)
 
 ▶ **[Sound and screen tour (MP4, 3 min)](media/medievalwind-tour.mp4)**: every
-control swept, then every preset. Sound is `engine.cpp` rendered offline; the
-screen is `display.cpp` drawn by the SDK's own renderer. Nothing in it was
-filmed on a device.
+control swept, then every preset, playing the 15th-century processional
+*Veni, veni, Emmanuel* phrase by phrase. Sound is `engine.cpp` rendered
+offline; the screen is `display.cpp` drawn by the SDK's own renderer. Nothing
+in it was filmed on a device.
 
 ![The screen](media/screen.png)
 
@@ -81,11 +82,18 @@ breath ──► mouth pressure ──► REED (clipped pressure-controlled valv
   releases the reed, so even marginal notes speak. Retriggers and legato keep
   the bore ringing; both taps glide sample by sample to a new pitch, so
   nothing clicks. Notes below 43 Hz fold up an octave to fit the bore.
+- **Level.** The voice uses the platform's full half-scale peak. Its makeup
+  gain rides on the bell's per-block coefficients, and a 4:1 soft knee above
+  60% of the peak rounds off the bell's brief spikes (it touches about 2% of
+  samples on the brightest preset, none on most): no hard clipping and no
+  extra work per sample. A voice plays at about −19 to −22 dBFS RMS.
 - **Hall and Echo** run inside each voice at a quarter of the audio rate
   (11.025 kHz: dark, cheap, small). Hall is two allpass diffusers into a
   four-line feedback delay network (lines of 26.6 to 45.3 ms, a Hadamard mix,
   damping in every line). Echo is a 3,072-sample line with a lowpass in its
   feedback. Their outputs return to the audio rate by linear interpolation.
+  Turning either up from zero clears its line an eighth per block (never the
+  whole line in one block) and the effect joins 11.6 ms later.
 
 ### Compromises
 
@@ -145,27 +153,40 @@ Each note throws a puff from the bell; held notes keep the wind moving. An
 idle screen stays still and reduced motion shows the end state at once. The
 header shows Hall's decay in seconds (`off` at zero) and the rest as 0 to 100.
 
-## CPU and memory
+## CPU and memory: no dropouts
+
+The OP-XY drops audio when a block's voices overrun their time, so Medieval
+Wind is built to keep every block light, and every block about as light as
+the next:
+
+- **Short loops.** The render is split into short passes (mouth; reed and
+  bore; the bell's radiation, formant and air; echo; each hall line; the
+  output) so each loop's state fits the Blackfin's eight data registers. The
+  first build's compiled code showed why: one hall/echo loop carried so much
+  that it spilled to the stack about 95 times per quarter-rate frame. The
+  rewrite is bit-identical (the render hash proves it).
+- **Specialised loops.** The reed/bore loop has versions for a steady pitch
+  (its tap fractions are fixed for the block) and for one tap (Crum at either
+  end), so the common cases skip work.
+- **No spikes.** Hall and Echo clear their lines an eighth per block; the
+  pitch-compensation arithmetic is cached while the note is steady and
+  refreshed at most every fourth block during bends; Breath 0 skips both
+  noise generators; Hall and Echo at 0 skip their passes entirely.
+- **Nothing slow per sample:** no division, floating point or 64-bit
+  arithmetic. Per block: three divisions.
 
 | Measure | Value | How it was measured |
 | --- | --- | --- |
 | Voice state | 11,860 bytes (bore 2 KiB, Echo 6 KiB, Hall 3.4 KiB) | `sizeof`, checked by the SDK build |
 | Voice pool | 104.2 KiB for `voiceCapacity` 8 (8 + the stock spare) of the shared 2,032 KiB module region | Computed per docs/api.md |
-| Per voice block | about 11,500 to 14,400 Blackfin instructions, median about 12,100, at the heaviest setting | SDK host-timed estimate, five runs. **Not a device measurement**; aim ≤ 15,000 |
-| On the OP-XY | **Not measured yet** | Use [tools/mac](tools/mac) |
+| Per voice block, host | about 11,500 to 15,200 Blackfin instructions at the heaviest setting, varying run to run | SDK host-timed estimate. **Not a device measurement**; aim ≤ 15,000 |
+| Compiled loops | See [AUDIT.md](AUDIT.md) §4 | Disassembly of the CI's pinned Blackfin compile |
+| On the OP-XY | **Not measured yet** | The hardware test kit / [tools/mac](tools/mac) |
 
-The render is split into four short passes (mouth, reed and bore, bell,
-space) so each loop's state fits the Blackfin's eight data registers, the
-lesson of Daath's first release. There is no division, floating point or
-64-bit arithmetic per sample. Per block: one division for the period, one for
-the blowing pressure and one for its ceiling, and the filter-lag arithmetic
-only when the note or the filters move. Breath at 0 skips both noise
-generators; Hall and Echo at 0 skip their passes entirely.
-
-`voiceCapacity` is 8, stock's per-track limit, as in Daath. Daath's 8 is not
-assumed to be affordable here: the hardware readout decides. If it comes in
-above the SDK's recommended 3.5% of the audio block per voice, lowering
-capacity or the effects' cost is the next step.
+`voiceCapacity` is 8, stock's per-track limit. Daath's 8 is not assumed to be
+affordable here: the hardware readout decides. If it comes in above the SDK's
+recommended 3.5% of the audio block per voice, lowering capacity or the
+effects' cost is the next step.
 
 ## Build, preview, test
 
@@ -212,7 +233,8 @@ python production/hero.py hero.svg && node production/render_svg.mjs hero.svg he
 python production/make_tour.py --sdk ../open-xy --work ../mw-tour-work                   # tour, poster, screen.png (~6 min)
 ```
 
-The tour's amp envelope is the script's own stand-in (stock time values read
+The tour's music is after *Veni, veni, Emmanuel* (a 15th-century French
+processional, public domain), arranged by the script. Its amp envelope is the script's own stand-in (stock time values read
 as `8 × (v/32767)²` seconds), one gain sets the whole film's peak to −1 dBFS,
 and the header uses the browser's fonts in place of the device's.
 

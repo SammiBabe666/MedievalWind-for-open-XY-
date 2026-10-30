@@ -67,25 +67,35 @@ All on Linux x86_64, GCC 13 and Clang 18, `-O2`; and again with
 | 256 control corners × 5 pitches (C1..A6), with restarts | Bounded by the declared peak, every one sounding |
 | 6,000 blocks of hostile control words and pitches | Bounded |
 | 10-minute sustained note at the most driven setting | Keeps sounding, bounded, DC −0.0016 |
-| Ten presets as 8-voice chords with steals and bends | Bounded, audible (RMS 0.08–0.13 of peak), DC < 0.0004; pairwise distinct |
+| Ten presets as 8-voice chords with steals and bends | Bounded, audible (RMS 0.13–0.21 of the half-scale peak), DC < 0.0004; pairwise distinct |
 | Notes | Speak within 50 ms; retriggers, legato and retriggers to a new note don't click; stolen voices start clean |
 | Display, 20,000 random frames and a 20-minute hold | Every frame valid; outlines keep 64 distinct points and enclose area; keys change with points; every control changes the artwork; idle and reduced motion still; on screen |
-| Bit-exact render | Hash `0xb2891dc5` on GCC and Clang |
+| Bit-exact render | Hash `0x6fc11dc5` on GCC and Clang |
 
 ## 4. CPU and memory
 
-- Host-timed estimate (`sdk.py test`), five runs: 11,500 / 14,400 / 11,900 /
-  12,100 / 13,200 Blackfin instructions per voice block at the heaviest
-  setting (median ~12,100; one earlier run read 16,400). The SDK's aim is
-  15,000. This is a host timing scaled by a reference loop, not a device
-  measurement, and it does not see register pressure.
-- Before optimisation the estimate was ~17,400. Changes: the filter-lag
-  arithmetic is cached while the note and filters are steady; Breath 0 skips
-  both noise generators; the Hall loop uses fixed line pointers instead of a
-  per-frame modulo (which was six divisions per quarter-rate sample).
+**Compiled Blackfin loops** (disassembly from the CI's pinned compile, inner
+loops of `render`; instructions per iteration, a bundle counts once; not cycles):
+
+| Build | Largest inner loop | Stack accesses in it | Notes |
+| --- | --- | --- | --- |
+| `5de4454` (first) | Hall/Echo frame loop, ~430 per quarter-rate frame | ~95 | One loop held both effects; the reed/bore loop was 101 per sample with 4 stack accesses, the bell 70 with 3 |
+| `9cd3e4e` (now) | 100 per sample (the two-tap reed/bore loop) | 2 | No inner loop has more than 3 stack accesses; the effect loops are 4 to 28 instructions per frame |
+
+The rewrite changed no output sample (render hash unchanged across it).
+Turning an effect on now clears its line over eight blocks (at most 602
+words per block), and the pitch-compensation arithmetic refreshes at most every
+fourth block while the pitch moves, so no block carries a one-off spike.
+
+- Host-timed estimate (`sdk.py test`): 11,500 to 15,200 Blackfin instructions
+  per voice block at the heaviest setting across runs (aim 15,000). A host
+  timing scaled by a reference loop, not a device measurement; it does not see
+  register pressure, which is why the disassembly is checked as well.
 - Memory: 11,860 bytes per voice; 104.2 KiB for 8 voices plus the spare.
-- **Pending:** the hardware CPU readout (tools/mac, or tools/profiling for a
-  CI-compiled module). `voiceCapacity` stays 8 until it is known.
+- Level: output peak is the platform's half scale; makeup gain rides on the
+  bell's per-block coefficients and a 4:1 soft knee replaces the output clamp,
+  so the +10.4 dB costs no per-sample work.
+- **Pending:** the hardware CPU readout. `voiceCapacity` stays 8 until it is known.
 
 ## 5. Known limitations and remaining work
 
