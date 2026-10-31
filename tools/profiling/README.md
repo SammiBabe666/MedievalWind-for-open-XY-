@@ -25,7 +25,9 @@ as Fujara's.
 3. **Measure in Chrome.** [make_test_page.py](make_test_page.py) writes one HTML
    file bound to that package: it speaks the SDK collector's protocol (greet,
    identity, benchmark) over Web MIDI, refuses a device not in normal mode on
-   OS 1.2.1, shows the results and downloads each run as a capture.
+   OS 1.2.1, shows the results and downloads each run as a capture. Restart
+   the OP-XY normally, without saving, before every run after the first: later
+   runs in the same boot are counted twice and the report refuses them.
 
    ```sh
    python tools/profiling/make_test_page.py ../open-xy <private>/medievalwind-cpu-NNN "Medieval Wind CPU test.html" medievalwind-cpu-TAG

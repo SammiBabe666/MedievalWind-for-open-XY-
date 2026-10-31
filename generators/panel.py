@@ -77,8 +77,8 @@ for k, (W, S) in enumerate(arches):
     h = math.sqrt(r * r - cx * cx)                # apex height above the springing line
     a0, a1 = math.pi, math.atan2(-h, -cx) + 2 * math.pi
     left = [(-W, 0), (-W, -S * 0.5)]
-    for i in range(21):
-        a = a0 + (a1 - a0) * i / 20
+    for i in range(14):                           # 14 arc points: the ribbon stays within 64 points
+        a = a0 + (a1 - a0) * i / 13
         left.append((cx + r * math.cos(a), -S + r * math.sin(a)))
     apex = left.pop()
     line = left + [apex] + [(-x, y) for x, y in reversed(left)]
@@ -99,7 +99,7 @@ for k in range(5):
         (P, 48 + k, mat(640, 320), d(ribbon(wave, 0.9))))
 # Bell rays (bound, 27..35): fine wedges pointing along +x from the mouth.
 for k in range(9):
-    add('<path id="%s_node_%d" transform="%s" d="M5,-0.75 L36,0 L5,0.75 Z" fill="%s" stroke="%s" stroke-width="0.6"/>' %
+    add('<path id="%s_node_%d" transform="%s" d="M5,-0.8 L36,-0.25 L36,0.25 L5,0.8 Z" fill="%s" stroke="%s" stroke-width="0.6"/>' %
         (P, 27 + k, mat(640, 320), INK, INK))
 
 
@@ -121,15 +121,11 @@ add('<circle id="%s_node_57" transform="%s" cx="0" cy="0" r="8" fill="none" stro
     (P, mat(640, 320)))
 
 # Pale underlays: the widest shawm and the crumhorn's crook, so the arches pass behind.
-shawm = []
-for i in range(40):
-    t = i / 39
-    shawm.append((48 + 242 * t, CY - (3 + 7.5 * t) - 1.5))
-for i in range(30):
-    s = i / 29
-    shawm.append((290 + 54 * s, CY - (10.5 + 19 * s ** 3) - 1.5))
-shawm += [(x, 2 * CY - y) for x, y in reversed(shawm)]
-add('<path d="%s" fill="%s" stroke="%s" stroke-width="0.3"/>' % (d(shawm), PAPER, PAPER))
+cone = [(48, CY - 4.5), (290, CY - 12), (290, CY + 12), (48, CY + 4.5)]
+add('<path d="%s" fill="%s" stroke="%s" stroke-width="0.3"/>' % (d(cone), PAPER, PAPER))
+flare = [(289 + 55 * i / 29, CY - (10.5 + 19 * (i / 29) ** 3) - 1.5) for i in range(30)]
+flare += [(x, 2 * CY - y) for x, y in reversed(flare)]
+add('<path d="%s" fill="%s" stroke="%s" stroke-width="0.3"/>' % (d(flare), PAPER, PAPER))
 crook = []
 for side in (1, -1):
     pts = []

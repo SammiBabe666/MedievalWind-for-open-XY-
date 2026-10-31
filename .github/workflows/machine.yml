@@ -66,3 +66,16 @@ jobs:
         run: python sdk/sdk.py toolchain fetch
       - name: Native compile (no stock firmware or device)
         run: python sdk/sdk.py compile --machine machine --out "${{ runner.temp }}/medievalwind-module"
+      # SDK docs/toolchain.md: inline helpers kept out of line are defined once per
+      # file, so machines that share a firmware can fail to link together. Compile
+      # Medieval Wind with the machines it is likely to share a firmware with.
+      - uses: actions/checkout@v4
+        with:
+          repository: SammiBabe666/Daath-OP-XY-WitchHouse-engine
+          path: daath
+      - uses: actions/checkout@v4
+        with:
+          repository: SammiBabe666/Fujara-Flute-for-XY
+          path: fujara
+      - name: Native compile beside Daath and Fujara (one firmware links)
+        run: python sdk/sdk.py compile --machine machine --machine daath --machine fujara --out "${{ runner.temp }}/shared-module"

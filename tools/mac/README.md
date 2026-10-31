@@ -32,7 +32,10 @@ Settings → Privacy & Security** and click **Open Anyway** next to the file's n
 2. **Second run: measure.** With the OP-XY started normally on the test
    firmware and connected by USB, double-click again and choose **Measure now**.
    It runs the benchmark three times (a few minutes each; don't touch the
-   OP-XY) and shows the result. The report opens as `report.md`.
+   OP-XY while one runs). Between runs it asks you to restart the OP-XY
+   normally, without saving: a second run in the same boot is counted twice
+   and the report refuses it (SDK docs/profiling.md). The report opens as
+   `report.md`.
 3. **Afterwards**, restart the OP-XY without saving and put your backup
    `os.ldr` and `op1_factory.json` back the same way (then write the OS), or
    rebuild your usual firmware in the Open-XY builder. Other custom machines

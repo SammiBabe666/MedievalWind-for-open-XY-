@@ -183,12 +183,22 @@ go=$(say_box "Before measuring:
 - Playback is stopped and your work is saved. The test plays its own notes and changes temporary settings: do not touch the OP-XY while it runs, and do not save afterwards.
 - Quit apps that use the OP-XY's MIDI (DAWs, Field Kit, the Open-XY builder tab). Leave USB audio off.
 
-It runs $RUNS times, a few minutes each." "Cancel" "Start")
+It runs $RUNS times, a few minutes each. Between runs it asks you to restart the OP-XY: each run needs a fresh start." "Cancel" "Start")
 [ "$go" = "Start" ] || exit 0
 
 stamp=$(date +%Y%m%d-%H%M%S)
 captures=()
 for n in $(seq 1 "$RUNS"); do
+    if [ "$n" -gt 1 ]; then
+        # SDK docs/profiling.md: later runs in the same boot are counted twice and the
+        # report refuses their capture. Restart, without saving, before every run after the first.
+        again=$(say_box "Measurement $((n - 1)) is done.
+
+Restart the OP-XY now: switch it off and on (don't save anything), let it start normally on the test firmware, keep it connected by USB, then click Continue.
+
+Each run needs a fresh start: a second run in the same boot is counted twice and refused." "Cancel" "Continue")
+        [ "$again" = "Continue" ] || exit 0
+    fi
     step "Measurement $n of $RUNS"
     out="$PRIVATE/medievalwind-cpu-run-$stamp-$n"
     (cd "$SDK" && "$VENV/bin/python" sdk.py profile benchmark --package "$PACKAGE" --installed --greet --out "$out") ||

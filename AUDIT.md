@@ -97,7 +97,30 @@ fourth block while the pitch moves, so no block carries a one-off spike.
   so the +10.4 dB costs no per-sample work.
 - **Pending:** the hardware CPU readout. `voiceCapacity` stays 8 until it is known.
 
-## 5. Known limitations and remaining work
+## 5. Design guidance (open-xy PR #260)
+
+Checked against the SDK guidance proposed in
+[etcetc000/open-xy#260](https://github.com/etcetc000/open-xy/pull/260)
+(docs on design principles, the screen budget and device pitfalls; open, based
+on the pinned `8d4bb49`).
+
+| Guidance | Status here |
+| --- | --- |
+| Outlines enclose area; no turn within 2.5° of straight back; points ≥ 1/8 px apart; closing edge ≥ 1/4 px | `tests/display.cpp` checks every mutable outline across every control and every pair of controls at 0/0.5/1 (1,944 frames) and 20,000 random frames; `tests/check_release.py` checks every authored path. The bell rays' needle tips now end flat |
+| Fills only from the artwork | Solid parts are authored with fills; the four mutable outlines are hollow |
+| One subpath, at most 64 points per path | Fixed: the arches had 90 points and an underlay 140 (with two repeated points); now at most 64, checked in CI |
+| Parts that meet share an outline or a pivot | Partly: the body (scale 2) and bell (scale 1) cannot share an origin within the ±64 px outline extent; both close on the joint, so a sub-pixel offset draws as a turned ring rather than a gap. To confirm on device photos |
+| Every control reads; motion scaled to the sound; fades, not jumps | Elements now fade in through the greys (bore rings in fixed places, rays, breath flecks, echo strokes, arches; the wind cap grows from the pirouette). Reed's drawing travel was doubled (the most audible control); it is still the smallest change on the sheet. [media/contact-sheet.png](media/contact-sheet.png): every control at 0, 50, 100 at 1:1 |
+| Redraw ≈ 20 changed nodes a frame while playing, 0 at rest | Measured on the host by diffing `display()` frames at the heaviest setting with a note held: 13.9 on average, 15 at most; 0 at rest (tested) |
+| Captions measured in the device font | Not measured: Univers Next Pro Light isn't available here. The widest caption is `3.0s` (four characters at 20 px) against about 53 px; check on the device |
+| One definition for shared code | `display.cpp` keeps file-local `static` copies of the sine and turn helpers instead of the SDK's out-of-line-able inline ones; function-local static tables moved to file scope; unused header tables removed. CI's Blackfin job now also compiles Medieval Wind together with Daath and Fujara |
+| No 64-bit or clz helpers; unused functions; includes | None used; tests build with `-Wall -Wextra -Werror` on GCC and Clang |
+| Restart the OP-XY before every benchmark run after the first | Fixed in the Mac kit (it asks for a restart between runs) and in the test-kit instructions |
+| Skip a voice's work once its tail is silent | Not applicable as written: the reed keeps sounding until the stock envelope ends (a synth gets no note-off), so the release blocks the benchmark counts are real work |
+| Host estimates swing under parallel load | Seen here too (11,500 to 15,200 between runs); time one machine at a time |
+| Photos of the screen on a device; CPU from the hardware readout | Pending: needs the OP-XY |
+
+## 6. Known limitations and remaining work
 
 - Hardware: install the test OS, listen, and the CPU readout (three runs of
   the Chrome test page, or `tools/mac`), then `sdk.py profile report`.

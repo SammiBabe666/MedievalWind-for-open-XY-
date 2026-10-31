@@ -20,6 +20,12 @@ in it was filmed on a device.
 
 ![The screen](media/screen.png)
 
+Every control at 0, 50 and 100, at the screen's real size:
+[media/contact-sheet.png](media/contact-sheet.png). The drawing follows the
+SDK's device drawing rules and screen budget (proposed in
+[open-xy#260](https://github.com/etcetc000/open-xy/pull/260); see
+[AUDIT.md](AUDIT.md) §5).
+
 **Status: host-tested, not yet verified on an OP-XY.** The preview, all host
 tests and sanitizer runs pass, and CI compiles it with the SDK's pinned
 Blackfin tools. No hardware audition or CPU readout exists yet: a profiling
@@ -140,8 +146,8 @@ A shawm in a stone court, wind leaving its bell, drawn as white lines on black.
 
 | Control | On the screen |
 | --- | --- |
-| Reed | The double reed's blades lengthen or pinch; a held note makes the tip flutter |
-| Bore | Rings inside the body: 3 to 14 of them, brighter as the bore rings stronger |
+| Reed | The double reed's blades shorten (18 to 9 px) and pinch shut; a held note makes the tip flutter |
+| Bore | Rings inside the body: 3 to 14 of them in fixed places, fading in and brightening as the bore rings stronger |
 | Bell | The bell flares wider and throws up to nine harmonic rays, longer and wider |
 | Breath | The gust's edges roughen and up to twelve flecks of air scatter around it |
 | Bend | The gust's path wavers more; while a note is held the waver travels |
@@ -149,8 +155,11 @@ A shawm in a stone court, wind leaving its bell, drawn as white lines on black.
 | Hall | The court's arches grow from 80% to full size, brighten, and more appear |
 | Echo | Up to five repeated wind strokes trail beside the gust |
 
-Each note throws a puff from the bell; held notes keep the wind moving. An
-idle screen stays still and reduced motion shows the end state at once. The
+New rays, flecks, echo strokes and arches fade in through the greys rather
+than appearing at once. Each note throws a puff from the bell; held notes keep
+the wind moving (about 14 changed elements a frame at the busiest settings;
+none at rest). An idle screen stays still and reduced motion shows the end
+state at once. The
 header shows Hall's decay in seconds (`off` at zero) and the rest as 0 to 100.
 
 ## CPU and memory: no dropouts
@@ -231,6 +240,7 @@ ffmpeg with libx264 and aac, the Inter fonts):
 export NODE_PATH=$(npm root -g)
 python production/hero.py hero.svg && node production/render_svg.mjs hero.svg hero.png   # then 1280 x 640 as media/hero.png
 python production/make_tour.py --sdk ../open-xy --work ../mw-tour-work                   # tour, poster, screen.png (~6 min)
+python production/contact_sheet.py --sdk ../open-xy --work ../mw-sheet-work              # every control at 0/50/100, 1:1
 ```
 
 The tour's music is after *Veni, veni, Emmanuel* (a 15th-century French

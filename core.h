@@ -13,8 +13,8 @@ const u32 bore_length = 1024;
 // Effects run at a quarter of the audio rate (11.025 kHz): dark, cheap and small.
 const u32 echo_length = 3072;            // 278.6 ms
 const u32 hall_lines = 4;
-const u32 hall_length[hall_lines] = {293, 359, 431, 499};   // 26.6..45.3 ms, primes
-const u32 diffuser_length[2] = {61, 97};
+// Hall lines of 293, 359, 431 and 499 samples (26.6..45.3 ms, primes) and
+// diffusers of 61 and 97, in one buffer; engine.cpp's hall_step addresses them.
 const u32 hall_total = 293 + 359 + 431 + 499 + 61 + 97;    // 1740
 
 // Only sound state. The SDK owns firmware headers, slot padding and allocation.
