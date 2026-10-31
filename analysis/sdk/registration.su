@@ -1,0 +1,6 @@
+registration.cpp:31:6:bool opxy::platform::registry::{anonymous}::owned(const volatile u32*, const opxy::platform::Record&, opxy::u32)	0	static
+registration.cpp:57:5:int opxy::platform::registry::add(const opxy::platform::registry::Registry&, const opxy::platform::registry::Pages&, const opxy::platform::Record&)	28	static
+registration.cpp:80:5:int opxy::platform::registry::add_screen(const opxy::platform::registry::Pages&, const opxy::platform::Record&, const opxy::platform::Screen&)	0	static
+registration.cpp:97:5:int opxy::platform::registry::ready(const opxy::platform::registry::Registry&, const opxy::platform::registry::Pages&, const opxy::platform::Record&, const opxy::platform::Screen*)	0	static
+registration.cpp:107:5:int opxy::platform::registry::known(const opxy::platform::registry::Registry&, const opxy::platform::registry::StockString*)	0	static
+registration.cpp:113:5:int opxy::platform::registry::name_matches(const opxy::platform::Record&, const opxy::platform::registry::StockString*)	4	static

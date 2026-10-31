@@ -1,0 +1,2639 @@
+{
+  "schema": 1,
+  "target": "opxy-1.2.1",
+  "status": "experimental-unqualified",
+  "sources": {
+    "collection": "bff19769c677b32b7878c64f271115513e6ca32ed86519b97136f8bf4d83707c",
+    "external/medievalwind/.github/workflows/machine.yml": "754c584803f1b82d0a237c4e9c7a0bc112e27ac5ccc0a5acbf7a4c417b776b03",
+    "external/medievalwind/.github/workflows/profiling-module.yml": "c379a0280e62f97f9d16354e19254dae325e4ff878981529c02c54766edc0cce",
+    "external/medievalwind/.gitignore": "c328e955e0b0459adbcd8a9a757af3f6e6e5f1e8b4ff1698b5442a06c79387ae",
+    "external/medievalwind/LICENSE": "e67586ae60f108a402f8af12deb1b1fd43bdb4912226b778d103b4cf4cfdb3bf",
+    "external/medievalwind/core.h": "1ed5fe1e9aaa6362e91a884e3555522931ed99a16d3699d50ff57e8b8bc7e0c5",
+    "external/medievalwind/definition.json": "ffb19fa59a066df04bbf2abb7000122ea69c125d96c3c3d62c77c68a91a4cf2f",
+    "external/medievalwind/display.cpp": "5b9ab37f169354461099824e06ffecc2b2aeb50628b376b6cd8a46364a45f6b0",
+    "external/medievalwind/display.h": "77584fcd7a87706a3221806bb288cd0e141d95fcaa4735025060e6c58fce9680",
+    "external/medievalwind/engine.cpp": "a1c3a5d09f0a35c4bccfcc5d5ab6f52c20c1aa234233240d60f978235b6a2b62",
+    "external/medievalwind/generators/panel.py": "7126709fdbb8978dbe446675dddb7e2ac3581791e826d9dca83bebe43fa018d4",
+    "external/medievalwind/generators/presets.py": "d3b1634a4d2ce928a87804fdac3b7762935349bf663d797da161f7ef9fd8e9c0",
+    "external/medievalwind/machine.json": "7c6aa892369e6c42dddca0e53a3ab9f7f26a9262dce7a8d68a5b6b8955b75811",
+    "external/medievalwind/media/contact-sheet.png": "b7bd7ba3d13de2e755209fb884ccd343e0fe3651ff81bb9173c4abd205baafcf",
+    "external/medievalwind/media/hero.png": "dae131f2fa751f822dad6fdac8d40396cee5928d229d11882ed817c6a4ccb81b",
+    "external/medievalwind/media/medievalwind-tour-poster.png": "9763bc1730286f8aaec6426f4d501d09a0def86dbc0b587e805090fd8124784d",
+    "external/medievalwind/media/medievalwind-tour.mp4": "6d372184bae72c12a79070128f0791525dbd6ffec0208a2921ce5208472bd5ff",
+    "external/medievalwind/media/screen.png": "cdd1d9378ccf00f912da9348592f1efa7fc8c2c87bcc3dbfa193abe890df143f",
+    "external/medievalwind/panel.svg.fragment": "fa07993f30068bc1ace7e0cac95bf972ddcf4d3693e5ef70b87747ed62d8db7d",
+    "external/medievalwind/presets/blackwood.json": "28f4b3afe8469be6c83c6eb381f710eacc6992c9f8711680b3f358eb273b0725",
+    "external/medievalwind/presets/chapel-reed.json": "f91221613daad3d00d9ca238e79688ae2b5f928c536cc0d8ea99bb1ae6c5a9dc",
+    "external/medievalwind/presets/default.json": "e20f6a75b45f1ce6da4aa01893f02f01d91eb9a0cd41689b53c7598f5e9acb55",
+    "external/medievalwind/presets/hollow-procession.json": "a9952cc181aa10a28f25c116f4491c6eaff6d303eb1c404728f33e54cb61b277",
+    "external/medievalwind/presets/last-light-through-stone.json": "5bca27cd984a2438fd1a2841ffb26edf5654e8381d453adb1aedbe1da39fe061",
+    "external/medievalwind/presets/moth-in-the-belfry.json": "9ef92025de7470e057d289b8e0dbb6a1df024dbc79a92de5191529c59830870e",
+    "external/medievalwind/presets/pilgrims-drone.json": "f45b63268b36b20609c0d022d910ff9b4f69f77ba8349c2c05d840e0eb5e394f",
+    "external/medievalwind/presets/the-black-court.json": "2fad53c6b16365c169e79b6dea73900a826e21e80fa67cba75bedce35b439b2d",
+    "external/medievalwind/presets/the-crumhorn.json": "d3b1e82e536a627d33c0e5b75f451e1e519bc998e673b1b4222a22d9a1fe2649",
+    "external/medievalwind/presets/the-kings-fool.json": "434b961a346e6066c2efb044f930d8d15e7a3628c8df78493d0e17ca94b97467",
+    "external/medievalwind/production/capture_screens.mjs": "5a9773cb1765dceb5a9803eb82e869499566673577ab78fabd6a694feb0f7d7a",
+    "external/medievalwind/production/contact_sheet.py": "4cd3597bb0912a69c6964e51d1d0652728ebc3bbaff1a5d115d70bae96f5ca1e",
+    "external/medievalwind/production/hero.py": "5f82422f16999c04e3d32c2151302c66882068fd1eeceb08bf197c72bc2403ba",
+    "external/medievalwind/production/make_tour.py": "f4dad6733065b94fc3955889c0a3c07ce52f62e43e1bf06dab07e63c2097f193",
+    "external/medievalwind/production/render.cc": "7254ba9b78962714959fade57a5b02c8b7079a14c6c408de5b8bc7e57a227b57",
+    "external/medievalwind/production/render_svg.mjs": "d336c8099de626da6c56e3b79c5688d68721455b851efc54804c5efd1955fb5a",
+    "external/medievalwind/tests/check.h": "badfa2b346f9c9ff39b0535b51f929f84ecfd4a5970ffcb0fb1b5706a9824f53",
+    "external/medievalwind/tests/check_release.py": "f239ba64e3ecfddd4d84e92266740b2b5d57c6d75e5769fddd69c2041892679b",
+    "external/medievalwind/tests/display.cpp": "ee3b0811fecfd173c3791e63573a8bb5df21f973010bef0fa7fe8475bbd53d72",
+    "external/medievalwind/tests/effects.cpp": "37dc17cd1c9f82a229ab27fad7d7d116fe0701e235f736c849999875897203e6",
+    "external/medievalwind/tests/play.h": "bc87260b2044527887fa454c5f6b4176443c7a8b7ac4e14a3ab37417c0875691",
+    "external/medievalwind/tests/presets.cpp": "013d0acb3b6b760d973011cddf5fca39af64bd4a1385ae1a591d40cad5c1badf",
+    "external/medievalwind/tests/render.cpp": "ab7e205d8aad58e5883f32347a382633cb45bccbf85bae4607d9c1655fdb5025",
+    "external/medievalwind/tests/sound.cpp": "59397c01528bf97f7f8094714f313f79d7c7e9742f3bebb1e647ff6c43509536",
+    "external/medievalwind/tests/tuning.cpp": "949e5ac61e648f109fb50554a56fcc620b0d2d90924e2b41f159e08298f36c65",
+    "external/medievalwind/tests/voices.cpp": "9a1926b5a36717b7a95dabf66b863b3000c8b904cde5ba9cb1fb6e255c4e8468",
+    "external/medievalwind/tools/mac/Medieval Wind CPU Test.command": "5d7e9a9634f39c336f65a91ef6c78d54b2e30ff5fa5b60cc06b9c05530200043",
+    "external/medievalwind/tools/mac/MedievalWind-CPU-Test-mac.zip": "57a0817ee7056fbe01847fa1939f5712c6d4f5daa5901cda6249ae03ca6a5b7b",
+    "external/medievalwind/tools/profiling/compile_module.py": "aaa45a53ec10dbae7c2b44434372e6e8d8b1e72794622fee144959b9017fa492",
+    "external/medievalwind/tools/profiling/finish_package.py": "80574731c63bba06dcb3463a2c4d857adbd0d9f5b8060612bc3ed8bc401aad76",
+    "external/medievalwind/tools/profiling/make_test_page.py": "aee1ef977a60192da0e5d737f962f62ff01de68409c6d02e3a7a1f66181511b2",
+    "linker/opxy-1.2.1.ld": "5f1e26c9d592459035519a905e2305c92165600e6626ba0ddd5bc360d4effd69",
+    "profiles/extensions.json": "a59021732826b6539166b8df3268bff6e1d899abf1b4e592b786ad288db5f914",
+    "profiles/opxy-1.2.1.json": "cfd2ebe1c602f62d50654254d72c1a6d4de6b13f0dfa3ae98958554bd1d96ede",
+    "sdk/include/opxy/audio.hpp": "e81dd1f9f8b14b4e839647a128cc2aaaa42c2e679eef467135bc06cf0d193e1b",
+    "sdk/include/opxy/double_tap.hpp": "8b7d6d1b712e7f29642f06d0bdb1f42cb0fb4ae3b0e14e5ae61b395302e7cfd0",
+    "sdk/include/opxy/draw.hpp": "275227c4272b4e54dfb54bfc00d9295bed3342f9e1c9c4776098b6cab0bc5134",
+    "sdk/include/opxy/effect.hpp": "7d83e19b73d9d0c0b03b4b4f5c4503524e67ed26303abb62ebcb2b57a69df452",
+    "sdk/include/opxy/extension.hpp": "876cdbad1533de5eef402444ae2e63a79c8d255055c46f2b092d4a0d92033d25",
+    "sdk/include/opxy/lease_pool.hpp": "6cf850ab64372aacb7c9e9300d68ac1177f5abf9cb0fad4a09a38d7155541ce7",
+    "sdk/include/opxy/page_header.hpp": "91cd803ef3b0257fccc2299807c5354d3afbb3e4f82903e5f85ee40771302c88",
+    "sdk/include/opxy/q31.hpp": "26eb1326eb4e16df00372ca452be5449f263e054f9dd01ff41642885c7f8dd31",
+    "sdk/include/opxy/sample.hpp": "83b673116459621a88050d553432c5ed0e8aee559a8cb43c165af68b50aaefbd",
+    "sdk/include/opxy/sample_analysis.hpp": "faa68d752df4171ef3c86ac3ae13cc5362d6997f97da639e8588eef7e6d5dfbc",
+    "sdk/include/opxy/sample_engine.hpp": "707262f166ad16ab26fd7159a6bb17c5f75a4deb57ae13f1a8ef5a0b102c9cd1",
+    "sdk/include/opxy/segments.hpp": "98b52e82da932febf79d77354d0e1a72021caf8f5814fc81af8224ec0f2cfd2b",
+    "sdk/include/opxy/transport.hpp": "654cb6e6560387834fead880bfc96e21e17f8f12cd0061583d6f832721984679",
+    "sdk/include/opxy/types.hpp": "28ac1dba047fcc327a9387521518a0dd65763ac3f81a4b69719a1d744fa622ce",
+    "sdk/platform/blackfin/divide.s": "458219858c9b767fdd61b7065e096fc813ccb26d912dc3298c953d11722bcc32",
+    "sdk/platform/blackfin/freestanding/algorithm": "3bf3900251bb5a154d0b02c9c6eb8ae702078c2e144f0aed3d510467dbb3b868",
+    "sdk/platform/blackfin/freestanding/cstdio": "999718ac7f5020788f5fc1a31c5ebcdc6d575395d612b612cdb9103d49335242",
+    "sdk/platform/blackfin/freestanding/cstring": "34b8715ce4f026b70c65072cd6f0078b21905bd92a894845415cd5ab62189c13",
+    "sdk/platform/blackfin/freestanding/inttypes.h": "888ce1e838b5250761ff40fb6b5e56c6ad1a8d9c8e5f5fa78e8b913839626c65",
+    "sdk/platform/blackfin/memory.cpp": "be482792378f6dccf2c199d81653fe0a4f11fd376b0697140e797fb21332094f",
+    "sdk/platform/extension_runtime.cpp": "4af13596b98d6d5c2e20bf8cef89dbb305bb01888e957ce06e3366d8d422507a",
+    "sdk/platform/extension_runtime.hpp": "8b94a473871530f1e2ac1cd82e3d23bd5c3ae0c7ac477fa3168990155ffbac3b",
+    "sdk/platform/opxy-1.2.1/barrier.hpp": "ddf4c41e573d316ba626dde3d90e11d017552f306bd1c9575ef9e1bec91c0be5",
+    "sdk/platform/opxy-1.2.1/benchmark.cpp.in": "6252347cb7567d35cbc3ec74e45542128aeca3b96a472b8830329bcc2b1df76f",
+    "sdk/platform/opxy-1.2.1/benchmark.hpp": "48ec103e2bd4b0bae6fa796845bf5019328de0411d2e6573eb30323af9ea0c44",
+    "sdk/platform/opxy-1.2.1/benchmark_clock.s": "9d0b7cf7ee49faec44fd329dab4786ac158fd54ddc1b61c746fe90f5402b9ea9",
+    "sdk/platform/opxy-1.2.1/benchmark_effect.cpp.in": "b713452d6ab30af20371518089a1def73109ea1603b662a9a2e363dbac8b7cc1",
+    "sdk/platform/opxy-1.2.1/benchmark_sample.cpp.in": "689f0eff05062ced3c4e13f2e28b094717efaa9ece8fb102326e0115f8d333fd",
+    "sdk/platform/opxy-1.2.1/drum_controls_stock.cpp": "16421815ccc2f0b90a46b47b75806a669c79cbff47642eae0fb7682d2e66f085",
+    "sdk/platform/opxy-1.2.1/drum_display_stock.cpp": "0759098a75efa80b98ff98e611eb5359ce4aa80f4e575808fd2dc6d8d5578ff0",
+    "sdk/platform/opxy-1.2.1/drum_page.s": "87cc4898d04ca2e3b2f9ddced07ea68e1f31fffb92773a732e929c406e94d824",
+    "sdk/platform/opxy-1.2.1/extension_stock.cpp": "6a1675c9e6dfb459e8a788b2a44d31439e356c89d4512c376430c2dc7c411db8",
+    "sdk/platform/opxy-1.2.1/fx_object.cpp.in": "7c34a378f26a7bfa6b29abd7df1c7b5de302c262c99b06f6ac45c5fbb328ee69",
+    "sdk/platform/opxy-1.2.1/hook.inc": "17b7b7a3e1f578ea05586bb8dc6a2c6169b6afcab9a2489e286604a9461eea85",
+    "sdk/platform/opxy-1.2.1/hook.s": "e10568f3da723d4ce78830f8a64ef810a384127f5845921a0b86d603c149ff77",
+    "sdk/platform/opxy-1.2.1/lfo.cpp": "3aab4e1bc0dbb09122c3f0da09f00acdc5a4ab3492a7850686cd142af318497c",
+    "sdk/platform/opxy-1.2.1/lfo.hpp": "3ea030fd9272471e043504749c8c74f7bc73e4e088558c85d5e7aec3ae4fb505",
+    "sdk/platform/opxy-1.2.1/lfo_hooks.s": "855705a7aad4c5c1221cee1b046dafad0d0e246739713b8bd1c2846f0e4522fa",
+    "sdk/platform/opxy-1.2.1/lfo_stock.cpp": "63f1b22eababa4dcb14865c8cdf694c1ad04d52b9a8d9c69fbff35ebb8ff9f77",
+    "sdk/platform/opxy-1.2.1/note_activity.cpp": "d6e81f9df55e5803b218205db44af7382e0ba7af50000ebfa6ffbfbf0ee514f9",
+    "sdk/platform/opxy-1.2.1/note_activity.hpp": "badb605ac265bd21a118d9eb80ac7dcdcc8eb012d7345dc16d6dbc3bf4d38482",
+    "sdk/platform/opxy-1.2.1/note_container.hpp": "d3be1e850b3b5c684f88cca4030587e5635178c4f5475fec49046fa7050342e2",
+    "sdk/platform/opxy-1.2.1/pad_assignment.s": "c49a48cd4f3bf0eb946f381b3c577037e902d3c652e54fdaf2dd10442c5d0abb",
+    "sdk/platform/opxy-1.2.1/pad_assignment_stock.cpp": "660fd9003dc90a6a3dd41d86cefe02f2bdc9846ae5d4119dd07357f2292ebaf7",
+    "sdk/platform/opxy-1.2.1/presets.cpp": "211c61b982869eb90b4395e97df0390b37b1de16118204346192f1eedcd381d2",
+    "sdk/platform/opxy-1.2.1/profiling.s": "100ae12590b60406391019119ee81c376f84ad7b4823ff6b3dcd5a884b8b02b3",
+    "sdk/platform/opxy-1.2.1/project_companion.cpp": "d336c8e4ef01132faa8e4d1748df6f110a5cdaadb86cca785adb0e90d164d3f7",
+    "sdk/platform/opxy-1.2.1/project_companion.hpp": "e332213af23913fb4d9041d84071d1d8d71766ad6ffcf2c3e14ddc1de173aa00",
+    "sdk/platform/opxy-1.2.1/project_companion_table.cpp.in": "6615f20b17483b7292aa659626839d3808e7c526dae4279180db9ba94ea96018",
+    "sdk/platform/opxy-1.2.1/registration.cpp": "87823edc4f587de9c9aca64ce19769e9fee00569a7ae8d84e7b2249ca6f8f95f",
+    "sdk/platform/opxy-1.2.1/registration.hpp": "56520a8ce2fbcc9ebce3e045f6e7b0d0374bd21a8c3b366d0a2e49a9f4c0bc95",
+    "sdk/platform/opxy-1.2.1/registration_stock.cpp.in": "a97291a46be9be4f25d4435c7ff6cef44c1faf1327fefc0dc934b8fd37d7d937",
+    "sdk/platform/opxy-1.2.1/sample_cache.cpp": "0e1aa19d2e44139c4c43fa6858b24f320cddca20cd80469006e0538258f25182",
+    "sdk/platform/opxy-1.2.1/sample_cache.hpp": "3b18a847bdb5683d067608d0f81d44dac10db2e9ce67c3697ae81e66060ed5f2",
+    "sdk/platform/opxy-1.2.1/sample_cache_hooks.s": "4ef458ca21dc7e5c8317950629998149f84f502eef48c877312e37454ebfc943",
+    "sdk/platform/opxy-1.2.1/sample_cache_stock.cpp": "d04226209add16109049245c599b7c25ec10b6c72e3d12bbb4c8ae00845dcb5a",
+    "sdk/platform/opxy-1.2.1/sample_callbacks.cpp.in": "a18572b6715d4880609fe469911f4553d4619118a98a198f432e2fc7728bccce",
+    "sdk/platform/opxy-1.2.1/sample_hooks.s": "a147c22f242325cd565d5677ce818f17697d44a8d69b2cb627cbe66afb043f02",
+    "sdk/platform/opxy-1.2.1/sample_machines.cpp": "1c5ef761ee8ece21397687ae3fc29d34c962e5de1355c6938069038d7c837f05",
+    "sdk/platform/opxy-1.2.1/sample_machines.hpp": "30f4c44fa7be96b541995712c870d5f5dcd1d3f33b7c7c858839d1824d8e29a9",
+    "sdk/platform/opxy-1.2.1/sample_progress.cpp": "6f55b827a7e7b90c2bd7e935b8265ddb119d2124b5f5a3ff24c2caf1bed8e012",
+    "sdk/platform/opxy-1.2.1/sample_progress_stock.cpp": "f74b3270576743020b4788a8b7713e4364117d48efa337e01d460fd051173c85",
+    "sdk/platform/opxy-1.2.1/sample_voice.cpp.in": "62f8bfaa1f51d3ebd5145b25a4c75000619879829f7e6d4e033b12f551fbc845",
+    "sdk/platform/opxy-1.2.1/screen.hpp": "35d9ecfd61827a839002fe8c0894dd6a9a5e12b5e6a7d2e5b7b87300616d07a8",
+    "sdk/platform/opxy-1.2.1/screen.svg": "d71b110ac905c1bcfcecc9ad94237aa72fe12c531e651f170bb5a1042547fb16",
+    "sdk/platform/opxy-1.2.1/screen_drawing.hpp": "8536aba60985e37a0ad393efd66bdd5a4a4b51b5db5e26930bd774ea82811c47",
+    "sdk/platform/opxy-1.2.1/screen_hooks.s": "0bef9290fa4e690e88c521673eeface8bc1f83c8439b31ab37e240c74805399d",
+    "sdk/platform/opxy-1.2.1/screen_order.cpp.in": "ac9dc0efebca7d10c2c27a59c03102d216fab60823b74e9cae0f0d78c878f5e2",
+    "sdk/platform/opxy-1.2.1/screen_order.hpp": "0fa574085757dcd07549e7086361986edc6a0644535539f008cd59a1235aad6e",
+    "sdk/platform/opxy-1.2.1/startup.cpp.in": "f4b078d667a393a8830774ec62f572647463b1f5ae3c3e836b9ae830fdc49d1c",
+    "sdk/platform/opxy-1.2.1/startup_exit.s": "3b2dffdb860eb6db6dfa253d08b4d81f65ca9978bbebf54e798d6e4911fd4e2f",
+    "sdk/platform/opxy-1.2.1/startup_label.s.in": "7724b2711e2948e5dd4dbf488284e0f7e062986be9f241e0c9e38195b1915475",
+    "sdk/platform/opxy-1.2.1/stock.hpp": "c185160cd0ce358dcfdd339d3f93992c629d549281e470505eadb1c7d30708a8",
+    "sdk/platform/opxy-1.2.1/stock_browser.cpp": "48f5f0fe3fe5b763e56d451b3f3c6ab4583a100d86fdbb92090474550d2e5056",
+    "sdk/platform/opxy-1.2.1/stock_browser.hpp": "1317c22b3c6fc3728b7214e9c4989ac0576371babf395400acef45b378e4cdf5",
+    "sdk/platform/opxy-1.2.1/stock_sample.hpp": "d23b9177663cb479c9b3c966fd1055d8527239b91db0d63eda2bd693fc979278",
+    "sdk/platform/opxy-1.2.1/synth_control_table.cpp.in": "03c680a7a1402ec261b014021e134cbb154937a2faea50fa3f61272efaa086c2",
+    "sdk/platform/opxy-1.2.1/synth_controls.cpp": "b8b12ce6345fcbc760f425d4be562be7d982e236dc355e9939f8562643b02a94",
+    "sdk/platform/opxy-1.2.1/synth_controls.hpp": "653e84d5fdc9007049302b177643cb4a1949e652548813f55f528941a9eac272",
+    "sdk/platform/opxy-1.2.1/voice.cpp.in": "534ebce77fd462e76dfa6bca287035aac1e5d961697476e09d2a80f34cf3b576",
+    "sdk/platform/opxy-1.2.1/voice_clock.s": "5c769ce0219d73f76d6f76b291c68cde43f16ecdc6b057307de929a41a480b10",
+    "tooling/__init__.py": "a34bca262b0d2739c08cf35f4a867f748b44221b3991dae549c3ee38e80d3991",
+    "tooling/adapters.py": "f19be1f8c5003176a04f369ab77598d530110d7961b0e0d79198c3794dfad1b1",
+    "tooling/benchmark.py": "6e413e2d04c8cd87526b645078a53f5fb4e9dd65af271980904f3aca7c1ca66a",
+    "tooling/browser_kit.py": "37540c04f69e4a9971f43f6d42a5378737059239b3457e7c87e05f1606ca3a1f",
+    "tooling/catalog.py": "198ce5d979921a8ba80734521545591fa7d2c67330f15652f921e7d86bb0528c",
+    "tooling/checks.py": "71c09b875497aed016ee9a01fc26857032fb8df2d708a986fc58c6b472c41414",
+    "tooling/contributors.py": "abecb5f1180125b9515820a752feb32112911233e5d76f3172bbf495bdb85586",
+    "tooling/cpu.py": "d75df859e76a5007510daebcccf53076f220fbec423d908b765c3b0e4921e175",
+    "tooling/cpu_measurement.py": "2756e8211e5b5e24c7319540e2179f77eb8db33885f2cef06e85f703383c2d8b",
+    "tooling/custom_preview.py": "3c40d25051751035027d0b694c59af29da1aed56d11e1c8cad6d1638b94b5730",
+    "tooling/definitions.py": "82e4db9b6bbb4b734a390e91879f83bdf94bef1336cf3ad6ecd610e8b1343f38",
+    "tooling/extensions.py": "4ec05f4508c998f72d88161cedbab1be883a81f52a95d1971a0f02ae6d6a5b5c",
+    "tooling/firmware.py": "153f8f194a97f404d41fe88ea6191f87e78d14d2e5d7b763ac6034e27471ca8d",
+    "tooling/formats.py": "d2893c73b34a957023eaa8d04a616c2b2045004b39f11b5c6a83bcb0d9eb6e29",
+    "tooling/machine_test.py": "269136eceb63a6c61de5a1ec2e04a753b674d17f525c2428b2835595b361b8e4",
+    "tooling/machines.py": "e8596e24180cf6722e88aed9d2e8222bdd2f2a46884b149fa91364108063c925",
+    "tooling/native.py": "e05a42dc167e6e024edeb7cdeb2974cfb3f4098fda3e78cc9b1e6926c631a97e",
+    "tooling/pipeline.py": "7700fdfcf7648c012b6450e27172da6a18da262ed657f16a1a31a3793154539f",
+    "tooling/preview.py": "32852bd99dd5605074099058e66bb917e14f89b0a0180f81b8f48a9839ea199a",
+    "tooling/preview_doctor.py": "a46cc7b02a6c2208bd120cedb93d596fc2d3f8faedd507addcd32c9b151568fc",
+    "tooling/profile_report.py": "6b357a6e128d6d9be743d9d101400ca09a5666d394d9dc727ac2eaa2bdd5ce25",
+    "tooling/projects.py": "1fa2764fd6d4b1dd30676674cbb4f3098c4ac9893dd3a7d2a2e54c2f130aa3a7",
+    "tooling/release.py": "787fb17dc2f2bea7147e0799dd4916a97c420cc869da57129c534ba57ccd0345",
+    "tooling/screen.py": "bc42c3403a4bbf3d47996a2e20004840ebddeaed35d365a4c20b643eb3f857b2",
+    "tooling/startup.py": "731db944c12dbe14a29aca0f6c7f4a0c6dc091169f433ea3a78cefca070d6d5d",
+    "tooling/startup_label.py": "4b510503d412e3c4c2fbbd71869407edffb7c6e1a89511da3a9a2c2067e852e9",
+    "tooling/stock_tables.py": "09644da29dd2eb1384c3b4fb7597b0b632a1921c4bb493fd7d7b2782875f9cc1",
+    "tooling/toolchain.py": "aae38270b2361d14c2b56ca7f050e6c6139e8df262e855c01f5e1340fb821c75"
+  },
+  "host": "windows-x86_64",
+  "tools": {
+    "as": "a8f3985d00c18df25c8ea77b12d006ab5bddca6dfcc603e0e43af05543ba7239",
+    "ld": "7390edfe342e1418f782c29cc7511a963de5c0496e7fe1f2ceae0d7fd377127d",
+    "objcopy": "dd5d9b193662469530df99ea11cf17a6714c0d5a0cf927d0b9eef9668986b5f6",
+    "objdump": "505f0bd72fa89c567d45bbf1679dabc4b8c2ae028057630772857d4363d79773"
+  },
+  "compiler": {
+    "bin/bfin-elf-g++.exe": "26dd01cac9ea234375e0d6a407d95ffcaa6aa483df632e312e17def70582525c",
+    "libexec/gcc/bfin-elf/8.0.0/cc1plus.exe": "fe04817253b4f2ae664f3861190173b42bc9bab826c70952e30711bdd357fa6a",
+    "libexec/gcc/bfin-elf/8.0.0/libgcc_s_seh-1.dll": "f9b64f3fc26fd1e8899503e84a62567cbe5cefc2bd3ef0fee5501386b2302cd5",
+    "libexec/gcc/bfin-elf/8.0.0/libgmp-10.dll": "37248cda33845e7c5c35a574e57da762dd0a8268f0270d179f30a33746809681",
+    "libexec/gcc/bfin-elf/8.0.0/libiconv-2.dll": "ff31fa811f9c07cc7fdaa68c9e8bca3a7b4fdf6e0a079a58175ea58ba139c7ae",
+    "libexec/gcc/bfin-elf/8.0.0/libmpc-3.dll": "6aa6d281fbfd53e2681992de774abbb7d7fde0a2fa653621e100abec06bce778",
+    "libexec/gcc/bfin-elf/8.0.0/libmpfr-6.dll": "240a2529b47db24a7a3050d2823d66d275d3c81c833aedd7432ec9d538f19945",
+    "libexec/gcc/bfin-elf/8.0.0/libwinpthread-1.dll": "199474f4885374778124211409eb94f55c012a57718316f86efd54f4cfbd8f20",
+    "libexec/gcc/bfin-elf/8.0.0/zlib1.dll": "cb7ab3788d10940df874acd97b1821bbb5ee4a91f3eec11982bb5bf7a3c96443",
+    "lib/gcc/bfin-elf/8.0.0/include/stddef.h": "0a9383c07ce0349294733e03872ee1213e3a42668d3d2ba5d3946c823f1041e1",
+    "lib/gcc/bfin-elf/8.0.0/include/stdint.h": "301099c873d5152e5abcba8755dcf21a5d3bbb33909acae114f1b7ecc30d37c8",
+    "lib/gcc/bfin-elf/8.0.0/include/stdint-gcc.h": "c3ca7ccddc3783cabb2c73dfdc35934c24fac19b70508e33949b59b7b4d5ee59",
+    "lib/gcc/bfin-elf/8.0.0/libgcc.a": "e1cfd0b472d51feea70123c999473c28d41dd03a0f54359dea8a742e3fbe2a2b"
+  },
+  "cxx_flags": [
+    "-mcpu=bf707",
+    "-O2",
+    "-std=gnu++11",
+    "-ffreestanding",
+    "-fno-exceptions",
+    "-fno-rtti",
+    "-fno-threadsafe-statics",
+    "-fno-use-cxa-atexit",
+    "-fno-asynchronous-unwind-tables",
+    "-fno-unwind-tables",
+    "-fno-common",
+    "-fno-tree-loop-distribute-patterns",
+    "-fomit-frame-pointer",
+    "-nostdinc++",
+    "-Wall",
+    "-Werror",
+    "-Wno-unused-variable"
+  ],
+  "profiling": true,
+  "benchmark_cases": [
+    {
+      "name": "prism",
+      "engine": 18,
+      "source": "stock"
+    },
+    {
+      "name": "simple",
+      "engine": 32,
+      "source": "stock"
+    },
+    {
+      "name": "hardsync",
+      "engine": 19,
+      "source": "stock"
+    },
+    {
+      "name": "dissolve",
+      "engine": 20,
+      "source": "stock"
+    },
+    {
+      "name": "axis",
+      "engine": 22,
+      "source": "stock"
+    },
+    {
+      "name": "organ",
+      "engine": 6,
+      "source": "stock"
+    },
+    {
+      "name": "epiano",
+      "engine": 7,
+      "source": "stock"
+    },
+    {
+      "name": "wavetable",
+      "engine": 31,
+      "source": "stock"
+    },
+    {
+      "name": "chord",
+      "engine": 13,
+      "source": "stock"
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-v1",
+      "metric": 5
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 0,
+        "label": "Reed",
+        "value": 0
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 0,
+        "label": "Reed",
+        "value": 268435455
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 0,
+        "label": "Reed",
+        "value": 536870911
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 0,
+        "label": "Reed",
+        "value": 805306367
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 0,
+        "label": "Reed",
+        "value": 1073741823
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 0,
+        "label": "Reed",
+        "value": 1342177279
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 0,
+        "label": "Reed",
+        "value": 1610612735
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 0,
+        "label": "Reed",
+        "value": 1879048191
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 0,
+        "label": "Reed",
+        "value": 2147483647
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 1,
+        "label": "Bore",
+        "value": 0
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 1,
+        "label": "Bore",
+        "value": 268435455
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 1,
+        "label": "Bore",
+        "value": 536870911
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 1,
+        "label": "Bore",
+        "value": 805306367
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 1,
+        "label": "Bore",
+        "value": 1073741823
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 1,
+        "label": "Bore",
+        "value": 1342177279
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 1,
+        "label": "Bore",
+        "value": 1610612735
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 1,
+        "label": "Bore",
+        "value": 1879048191
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 1,
+        "label": "Bore",
+        "value": 2147483647
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 2,
+        "label": "Bell",
+        "value": 0
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 2,
+        "label": "Bell",
+        "value": 268435455
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 2,
+        "label": "Bell",
+        "value": 536870911
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 2,
+        "label": "Bell",
+        "value": 805306367
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 2,
+        "label": "Bell",
+        "value": 1073741823
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 2,
+        "label": "Bell",
+        "value": 1342177279
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 2,
+        "label": "Bell",
+        "value": 1610612735
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 2,
+        "label": "Bell",
+        "value": 1879048191
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 2,
+        "label": "Bell",
+        "value": 2147483647
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 3,
+        "label": "Breath",
+        "value": 0
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 3,
+        "label": "Breath",
+        "value": 268435455
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 3,
+        "label": "Breath",
+        "value": 536870911
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 3,
+        "label": "Breath",
+        "value": 805306367
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 3,
+        "label": "Breath",
+        "value": 1073741823
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 3,
+        "label": "Breath",
+        "value": 1342177279
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 3,
+        "label": "Breath",
+        "value": 1610612735
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 3,
+        "label": "Breath",
+        "value": 1879048191
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 3,
+        "label": "Breath",
+        "value": 2147483647
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 4,
+        "label": "Bend",
+        "value": 0
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 4,
+        "label": "Bend",
+        "value": 268435455
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 4,
+        "label": "Bend",
+        "value": 536870911
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 4,
+        "label": "Bend",
+        "value": 805306367
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 4,
+        "label": "Bend",
+        "value": 1073741823
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 4,
+        "label": "Bend",
+        "value": 1342177279
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 4,
+        "label": "Bend",
+        "value": 1610612735
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 4,
+        "label": "Bend",
+        "value": 1879048191
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 4,
+        "label": "Bend",
+        "value": 2147483647
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 5,
+        "label": "Crum",
+        "value": 0
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 5,
+        "label": "Crum",
+        "value": 268435455
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 5,
+        "label": "Crum",
+        "value": 536870911
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 5,
+        "label": "Crum",
+        "value": 805306367
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 5,
+        "label": "Crum",
+        "value": 1073741823
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 5,
+        "label": "Crum",
+        "value": 1342177279
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 5,
+        "label": "Crum",
+        "value": 1610612735
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 5,
+        "label": "Crum",
+        "value": 1879048191
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 5,
+        "label": "Crum",
+        "value": 2147483647
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 6,
+        "label": "Hall",
+        "value": 0
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 6,
+        "label": "Hall",
+        "value": 268435455
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 6,
+        "label": "Hall",
+        "value": 536870911
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 6,
+        "label": "Hall",
+        "value": 805306367
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 6,
+        "label": "Hall",
+        "value": 1073741823
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 6,
+        "label": "Hall",
+        "value": 1342177279
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 6,
+        "label": "Hall",
+        "value": 1610612735
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 6,
+        "label": "Hall",
+        "value": 1879048191
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 6,
+        "label": "Hall",
+        "value": 2147483647
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 7,
+        "label": "Echo",
+        "value": 0
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 7,
+        "label": "Echo",
+        "value": 268435455
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 7,
+        "label": "Echo",
+        "value": 536870911
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 7,
+        "label": "Echo",
+        "value": 805306367
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 7,
+        "label": "Echo",
+        "value": 1073741823
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 7,
+        "label": "Echo",
+        "value": 1342177279
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 7,
+        "label": "Echo",
+        "value": 1610612735
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 7,
+        "label": "Echo",
+        "value": 1879048191
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "setting": {
+        "control": 7,
+        "label": "Echo",
+        "value": 2147483647
+      }
+    },
+    {
+      "name": "medievalwind",
+      "engine": 68,
+      "source": "sdk",
+      "kind": "synth",
+      "benchmark": "opxy-synth-c8-sweep-v1",
+      "metric": 5,
+      "combined": true
+    }
+  ],
+  "benchmark_sweep": true,
+  "sizes": {
+    "initialized_bytes": 74164,
+    "bss_bytes": 132880,
+    "allocated_span_bytes": 207044
+  },
+  "memory": {
+    "medievalwind": {
+      "initialized_bytes": 23532,
+      "state_bytes": 115256
+    },
+    "sdk": {
+      "initialized_bytes": 50632,
+      "state_bytes": 17624
+    }
+  },
+  "module_bytes": 2080768,
+  "audio_stack_bytes": {
+    "medievalwind": 944
+  },
+  "reserved_bytes": 2097152,
+  "module_sha256": "afe6e1ab63a61b06b4e62c3ddca30461a1d2d3e7ec3664c068f023baf651ba73",
+  "elf_sha256": "8e1e52245756aa92a83ab6dac8ba63801592e6618f2a8f313980a6cf8cc46814",
+  "hooks": {
+    "extensions_synth_exit": 2368559360,
+    "extensions_screen_exit": 2368559380,
+    "extensions_catalog_checked": 2368559196,
+    "sdk_engine_bound": 2368558896,
+    "sdk_screen_advance": 2368560820,
+    "sdk_synth_press": 2368561460,
+    "sdk_effect_turn": 2368562088,
+    "sdk_synth_turn": 2368561928,
+    "sdk_preset_type": 2368606328,
+    "sdk_param_steps": 2368561680,
+    "sdk_fx_value": 2368560860,
+    "sdk_fx_title": 2368562444,
+    "sdk_note_off": 2368563256,
+    "sdk_project_save": 2368602128,
+    "sdk_project_load": 2368603668,
+    "sdk_lfo_range": 2368604472,
+    "sdk_lfo_step": 2368604884,
+    "sdk_lfo_audio": 2368605288,
+    "sdk_synth_title": 2368561396,
+    "sdk_lfo_element_icon": 2368605312,
+    "sdk_lfo_random_icon": 2368605348,
+    "sdk_lfo_value_icon": 2368605384,
+    "sdk_lfo_element_name": 2368605420,
+    "sdk_lfo_element_initial_icon": 2368605444,
+    "sdk_lfo_cycle": 2368604708,
+    "sdk_lfo_label": 2368604628,
+    "sdk_benchmark_run": 2368559544
+  },
+  "objects": {
+    "medievalwind/voice.o": "medievalwind",
+    "medievalwind/display.o": "medievalwind",
+    "medievalwind/screen.o": "medievalwind",
+    "medievalwind/registration.o": "medievalwind",
+    "sdk/divide.o": null,
+    "sdk/memory.o": null,
+    "sdk/registration.o": null,
+    "sdk/registration_stock.o": null,
+    "sdk/startup.o": null,
+    "sdk/startup_exit.o": null,
+    "sdk/startup_label.o": null,
+    "sdk/benchmark.o": null,
+    "sdk/benchmark_clock.o": null,
+    "sdk/voice_clock.o": null,
+    "sdk/hook.o": null,
+    "sdk/screen_order.o": null,
+    "sdk/screen_hooks.o": null,
+    "sdk/synth_controls.o": null,
+    "sdk/synth_control_table.o": null,
+    "sdk/note_activity.o": null,
+    "sdk/project_companion.o": null,
+    "sdk/project_companion_table.o": null,
+    "sdk/profiling.o": null,
+    "sdk/lfo.o": null,
+    "sdk/lfo_stock.o": null,
+    "sdk/lfo_hooks.o": null,
+    "sdk/stock_browser.o": null,
+    "sdk/presets.o": null
+  },
+  "patches": [
+    {
+      "kind": "heap",
+      "name": "IN-MEMORY application heap 0x1400000 -> 0x1200000 (2 MiB module reservation)",
+      "address": "0x8d4d03ba",
+      "file_offset": "0x107616",
+      "length": 8,
+      "before": "01da400100000000",
+      "after": "01da200100000000"
+    },
+    {
+      "kind": "heap",
+      "name": "IN-MEMORY application heap 0x1400000 -> 0x1200000 (2 MiB module reservation)",
+      "address": "0x8d4d03d4",
+      "file_offset": "0x107630",
+      "length": 8,
+      "before": "01da400100000000",
+      "after": "01da200100000000"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8d506a02",
+      "file_offset": "0x13dc5e",
+      "length": 4,
+      "before": "c66cbb05",
+      "symbol": "extensions_synth_exit",
+      "call": false,
+      "after": "eee27f77"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8d523dac",
+      "file_offset": "0x15b008",
+      "length": 4,
+      "before": "01e80000",
+      "symbol": "extensions_screen_exit",
+      "call": false,
+      "after": "ede2b48d"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8d523e08",
+      "file_offset": "0x15b064",
+      "length": 4,
+      "before": "01e80000",
+      "symbol": "extensions_screen_exit",
+      "call": false,
+      "after": "ede2868d"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8d4e0bf6",
+      "file_offset": "0x117e52",
+      "length": 4,
+      "before": "06e399e6",
+      "symbol": "extensions_catalog_checked",
+      "call": true,
+      "after": "efe333a6"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8d4e0d98",
+      "file_offset": "0x117ff4",
+      "length": 4,
+      "before": "06e3c8e5",
+      "symbol": "extensions_catalog_checked",
+      "call": true,
+      "after": "efe362a5"
+    },
+    {
+      "kind": "table",
+      "name": "IN-MEMORY engine record base -> relocated table",
+      "address": "0x8d505292",
+      "file_offset": "0x13c4ee",
+      "length": 8,
+      "before": "02da0308fc940000",
+      "after": "02da4c8d50cf0000"
+    },
+    {
+      "kind": "table",
+      "name": "IN-MEMORY engine record base -> relocated table",
+      "address": "0x8d50533e",
+      "file_offset": "0x13c59a",
+      "length": 8,
+      "before": "02da0308fc940000",
+      "after": "02da4c8d50cf0000"
+    },
+    {
+      "kind": "table",
+      "name": "IN-MEMORY engine record base -> relocated table",
+      "address": "0x8d505366",
+      "file_offset": "0x13c5c2",
+      "length": 8,
+      "before": "02da0308fc940000",
+      "after": "02da4c8d50cf0000"
+    },
+    {
+      "kind": "table",
+      "name": "IN-MEMORY engine record base -> relocated table",
+      "address": "0x8d50652a",
+      "file_offset": "0x13d786",
+      "length": 8,
+      "before": "08da0308fc940000",
+      "after": "08da4c8d50cf0000"
+    },
+    {
+      "kind": "table",
+      "name": "IN-MEMORY engine record base -> relocated table",
+      "address": "0x8d5067e2",
+      "file_offset": "0x13da3e",
+      "length": 8,
+      "before": "00da0308fc940000",
+      "after": "00da4c8d50cf0000"
+    },
+    {
+      "kind": "table",
+      "name": "IN-MEMORY engine record base -> relocated table",
+      "address": "0x8d506c74",
+      "file_offset": "0x13ded0",
+      "length": 8,
+      "before": "01da0308fc940000",
+      "after": "01da4c8d50cf0000"
+    },
+    {
+      "kind": "table",
+      "name": "IN-MEMORY engine record base -> relocated table",
+      "address": "0x8d506e9e",
+      "file_offset": "0x13e0fa",
+      "length": 8,
+      "before": "08da0308fc940000",
+      "after": "08da4c8d50cf0000"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8d505356",
+      "file_offset": "0x13c5b2",
+      "length": 4,
+      "before": "09618808",
+      "symbol": "sdk_engine_bound",
+      "call": true,
+      "after": "eee3ed81"
+    },
+    {
+      "kind": "table",
+      "name": "IN-MEMORY engine record count -> relocated table",
+      "address": "0x8d5067dc",
+      "file_offset": "0x13da38",
+      "length": 4,
+      "before": "22e13006",
+      "after": "22e10030"
+    },
+    {
+      "kind": "table",
+      "name": "IN-MEMORY screen slot base -> relocated table",
+      "address": "0x8d520792",
+      "file_offset": "0x1579ee",
+      "length": 8,
+      "before": "00daeb8428320000",
+      "after": "00da4c8d50ff0000"
+    },
+    {
+      "kind": "table",
+      "name": "IN-MEMORY screen slot base -> relocated table",
+      "address": "0x8d5207c8",
+      "file_offset": "0x157a24",
+      "length": 8,
+      "before": "00daeb8428320000",
+      "after": "00da4c8d50ff0000"
+    },
+    {
+      "kind": "table",
+      "name": "IN-MEMORY screen slot count -> relocated table",
+      "address": "0x8d5208be",
+      "file_offset": "0x157b1a",
+      "length": 4,
+      "before": "27e15100",
+      "after": "27e10001"
+    },
+    {
+      "kind": "table",
+      "name": "IN-MEMORY screen slot count -> relocated table",
+      "address": "0x8d520d3e",
+      "file_offset": "0x157f9a",
+      "length": 4,
+      "before": "27e15100",
+      "after": "27e10001"
+    },
+    {
+      "kind": "table",
+      "name": "IN-MEMORY effect record base -> relocated table",
+      "address": "0x8d505276",
+      "file_offset": "0x13c4d2",
+      "length": 8,
+      "before": "02da03086c910000",
+      "after": "02da4c8d80c30000"
+    },
+    {
+      "kind": "table",
+      "name": "IN-MEMORY effect record base -> relocated table",
+      "address": "0x8d5052b6",
+      "file_offset": "0x13c512",
+      "length": 8,
+      "before": "02da03086c910000",
+      "after": "02da4c8d80c30000"
+    },
+    {
+      "kind": "table",
+      "name": "IN-MEMORY effect record base -> relocated table",
+      "address": "0x8d505314",
+      "file_offset": "0x13c570",
+      "length": 8,
+      "before": "02da03086c910000",
+      "after": "02da4c8d80c30000"
+    },
+    {
+      "kind": "table",
+      "name": "IN-MEMORY effect record base -> relocated table",
+      "address": "0x8d5066ba",
+      "file_offset": "0x13d916",
+      "length": 8,
+      "before": "08da03086c910000",
+      "after": "08da4c8d80c30000"
+    },
+    {
+      "kind": "table",
+      "name": "IN-MEMORY effect record base -> relocated table",
+      "address": "0x8d506cb8",
+      "file_offset": "0x13df14",
+      "length": 8,
+      "before": "01da03086c910000",
+      "after": "01da4c8d80c30000"
+    },
+    {
+      "kind": "table",
+      "name": "IN-MEMORY effect record base -> relocated table",
+      "address": "0x8d506f28",
+      "file_offset": "0x13e184",
+      "length": 8,
+      "before": "08da03086c910000",
+      "after": "08da4c8d80c30000"
+    },
+    {
+      "kind": "table",
+      "name": "IN-MEMORY effect record bound -> relocated table",
+      "address": "0x8d505304",
+      "file_offset": "0x13c560",
+      "length": 2,
+      "before": "9960",
+      "after": "f961"
+    },
+    {
+      "kind": "table",
+      "name": "IN-MEMORY effect record bound -> relocated table",
+      "address": "0x8d506f20",
+      "file_offset": "0x13e17c",
+      "length": 2,
+      "before": "9960",
+      "after": "f961"
+    },
+    {
+      "kind": "table",
+      "name": "IN-MEMORY effect record bound -> relocated table",
+      "address": "0x8d50e768",
+      "file_offset": "0x1459c4",
+      "length": 2,
+      "before": "9860",
+      "after": "f861"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8d5214c2",
+      "file_offset": "0x15871e",
+      "length": 8,
+      "before": "0f6420e151008708",
+      "symbol": "sdk_screen_advance",
+      "call": true,
+      "after": "00de2d8db45e0000"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8d5b79c0",
+      "file_offset": "0x1eec18",
+      "length": 6,
+      "before": "980d00e80000",
+      "symbol": "extensions_sample_classify",
+      "service": "samples",
+      "call": false,
+      "after": "980d00e80000"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8d5ad670",
+      "file_offset": "0x1e48c8",
+      "length": 4,
+      "before": "f5602f08",
+      "symbol": "extensions_sample_note_region",
+      "service": "samples",
+      "call": true,
+      "after": "f5602f08"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8d50bc58",
+      "file_offset": "0x142eb4",
+      "length": 4,
+      "before": "ffe3ece2",
+      "symbol": "sdk_sample_cache_destroy",
+      "service": "samples",
+      "call": true,
+      "after": "ffe3ece2"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8d51ea08",
+      "file_offset": "0x155c64",
+      "length": 4,
+      "before": "00e3f614",
+      "symbol": "sdk_sample_progress_frame",
+      "service": "samples",
+      "call": true,
+      "after": "00e3f614"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8d4daf7e",
+      "file_offset": "0x1121da",
+      "length": 8,
+      "before": "00d80384d0930000",
+      "symbol": "sdk_sample_cache_snapshot",
+      "service": "samples",
+      "call": true,
+      "after": "00d80384d0930000"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8d4da57c",
+      "file_offset": "0x1117d8",
+      "length": 4,
+      "before": "abe46400",
+      "symbol": "sdk_sample_cache_ipc_priority",
+      "service": "samples",
+      "call": true,
+      "after": "abe46400"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8d4daa06",
+      "file_offset": "0x111c62",
+      "length": 4,
+      "before": "01e3f786",
+      "symbol": "sdk_sample_cache_gui_add",
+      "service": "samples",
+      "call": true,
+      "after": "01e3f786"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8d4d8544",
+      "file_offset": "0x10f7a0",
+      "length": 4,
+      "before": "01e35899",
+      "symbol": "sdk_sample_cache_audio_add",
+      "service": "samples",
+      "call": true,
+      "after": "01e35899"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8d4da9be",
+      "file_offset": "0x111c1a",
+      "length": 4,
+      "before": "01e3c779",
+      "symbol": "sdk_sample_cache_reset",
+      "service": "samples",
+      "call": true,
+      "after": "01e3c779"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8d4d84d8",
+      "file_offset": "0x10f734",
+      "length": 4,
+      "before": "01e33a8c",
+      "symbol": "sdk_sample_cache_reset",
+      "service": "samples",
+      "call": true,
+      "after": "01e33a8c"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8d50c59c",
+      "file_offset": "0x1437f8",
+      "length": 4,
+      "before": "ffe382fb",
+      "symbol": "sdk_sample_cache_worker",
+      "service": "samples",
+      "call": true,
+      "after": "ffe382fb"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8d4da9b2",
+      "file_offset": "0x111c0e",
+      "length": 4,
+      "before": "ffe38bff",
+      "symbol": "sdk_sample_cache_send",
+      "service": "samples",
+      "call": true,
+      "after": "ffe38bff"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8c0b1316",
+      "file_offset": "0xe8552",
+      "length": 8,
+      "before": "00de588d1c780000",
+      "symbol": "sdk_sample_ui_engine",
+      "service": "samples",
+      "call": true,
+      "after": "00de588d1c780000"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8c0b1666",
+      "file_offset": "0xe88a2",
+      "length": 8,
+      "before": "00de4d8dd8cc0000",
+      "symbol": "sdk_sample_region_control",
+      "service": "samples",
+      "call": true,
+      "after": "00de4d8dd8cc0000"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8c0b2730",
+      "file_offset": "0xe996c",
+      "length": 8,
+      "before": "00de588d1c780000",
+      "symbol": "sdk_sample_press_engine",
+      "service": "samples",
+      "call": true,
+      "after": "00de588d1c780000"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8c0a22fe",
+      "file_offset": "0xd953a",
+      "length": 8,
+      "before": "00de4f8d36d40000",
+      "symbol": "sdk_sample_assignment_frames",
+      "service": "samples",
+      "call": true,
+      "after": "00de4f8d36d40000"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8c0a4400",
+      "file_offset": "0xdb63c",
+      "length": 8,
+      "before": "00de588d1c780000",
+      "symbol": "sdk_sample_ui_engine",
+      "service": "samples",
+      "call": true,
+      "after": "00de588d1c780000"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8c0a450a",
+      "file_offset": "0xdb746",
+      "length": 8,
+      "before": "00de588d1c780000",
+      "symbol": "sdk_sample_ui_engine",
+      "service": "samples",
+      "call": true,
+      "after": "00de588d1c780000"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8c0a4e36",
+      "file_offset": "0xdc072",
+      "length": 8,
+      "before": "00de588d1c780000",
+      "symbol": "sdk_sample_ui_engine",
+      "service": "samples",
+      "call": true,
+      "after": "00de588d1c780000"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8c0a4f56",
+      "file_offset": "0xdc192",
+      "length": 8,
+      "before": "00de588d1c780000",
+      "symbol": "sdk_sample_ui_engine",
+      "service": "samples",
+      "call": true,
+      "after": "00de588d1c780000"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8c0a5138",
+      "file_offset": "0xdc374",
+      "length": 8,
+      "before": "00de588d1c780000",
+      "symbol": "sdk_sample_ui_engine",
+      "service": "samples",
+      "call": true,
+      "after": "00de588d1c780000"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8c090d64",
+      "file_offset": "0xc7fa0",
+      "length": 8,
+      "before": "00de588d1c780000",
+      "symbol": "sdk_sample_ui_engine",
+      "service": "samples",
+      "call": true,
+      "after": "00de588d1c780000"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8c0a2c6c",
+      "file_offset": "0xd9ea8",
+      "length": 8,
+      "before": "00de588d1c780000",
+      "symbol": "sdk_sample_ui_engine",
+      "service": "samples",
+      "call": true,
+      "after": "00de588d1c780000"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8c0a2dea",
+      "file_offset": "0xda026",
+      "length": 8,
+      "before": "00de588d1c780000",
+      "symbol": "sdk_sample_ui_engine",
+      "service": "samples",
+      "call": true,
+      "after": "00de588d1c780000"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8c0a2f0c",
+      "file_offset": "0xda148",
+      "length": 8,
+      "before": "00de588d1c780000",
+      "symbol": "sdk_sample_ui_engine",
+      "service": "samples",
+      "call": true,
+      "after": "00de588d1c780000"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8c0a3012",
+      "file_offset": "0xda24e",
+      "length": 8,
+      "before": "00de588d1c780000",
+      "symbol": "sdk_sample_ui_engine",
+      "service": "samples",
+      "call": true,
+      "after": "00de588d1c780000"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8c0a33b6",
+      "file_offset": "0xda5f2",
+      "length": 8,
+      "before": "00de588d1c780000",
+      "symbol": "sdk_sample_ui_engine",
+      "service": "samples",
+      "call": true,
+      "after": "00de588d1c780000"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8c0a33ca",
+      "file_offset": "0xda606",
+      "length": 8,
+      "before": "00de588d1c780000",
+      "symbol": "sdk_sample_ui_engine",
+      "service": "samples",
+      "call": true,
+      "after": "00de588d1c780000"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8c0a4df2",
+      "file_offset": "0xdc02e",
+      "length": 8,
+      "before": "00de588d1c780000",
+      "symbol": "sdk_sample_ui_engine",
+      "service": "samples",
+      "call": true,
+      "after": "00de588d1c780000"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8d5686f0",
+      "file_offset": "0x19f94c",
+      "length": 4,
+      "before": "00e396f8",
+      "symbol": "sdk_sample_ui_engine",
+      "service": "samples",
+      "call": true,
+      "after": "00e396f8"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8c0a4440",
+      "file_offset": "0xdb67c",
+      "length": 8,
+      "before": "00de588d8c9b0000",
+      "symbol": "sdk_sample_record_region",
+      "service": "samples",
+      "call": true,
+      "after": "00de588d8c9b0000"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8c0a23f4",
+      "file_offset": "0xd9630",
+      "length": 8,
+      "before": "00de588d8c9b0000",
+      "symbol": "sdk_sample_assign_region",
+      "service": "samples",
+      "call": true,
+      "after": "00de588d8c9b0000"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8d589c40",
+      "file_offset": "0x1c0e9c",
+      "length": 8,
+      "before": "00de0204d80f0000",
+      "symbol": "sdk_sample_assign_fade",
+      "service": "samples",
+      "call": true,
+      "after": "00de0204d80f0000"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8d589210",
+      "file_offset": "0x1c046c",
+      "length": 4,
+      "before": "00e80000",
+      "symbol": "extensions_sample_key",
+      "service": "samples",
+      "call": false,
+      "after": "00e80000"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8d5353a6",
+      "file_offset": "0x16c602",
+      "length": 4,
+      "before": "ffe32df6",
+      "symbol": "sdk_sample_drum_display",
+      "service": "samples",
+      "call": true,
+      "after": "ffe32df6"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8d535222",
+      "file_offset": "0x16c47e",
+      "length": 4,
+      "before": "fde3890e",
+      "symbol": "sdk_sample_drum_range",
+      "service": "samples",
+      "call": true,
+      "after": "fde3890e"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8d5355ac",
+      "file_offset": "0x16c808",
+      "length": 4,
+      "before": "48a1404d",
+      "symbol": "sdk_sample_drum_fade",
+      "service": "samples",
+      "call": true,
+      "after": "48a1404d"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8c0a1bd6",
+      "file_offset": "0xd8e12",
+      "length": 8,
+      "before": "0dda010808f40000",
+      "symbol": "sdk_sample_pending_retry",
+      "service": "samples",
+      "call": true,
+      "after": "0dda010808f40000"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8c0a1bbc",
+      "file_offset": "0xd8df8",
+      "length": 8,
+      "before": "0cda010824f40000",
+      "symbol": "sdk_sample_active_retry",
+      "service": "samples",
+      "call": true,
+      "after": "0cda010824f40000"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8d5ad3aa",
+      "file_offset": "0x1e4602",
+      "length": 4,
+      "before": "00e32353",
+      "symbol": "sdk_sample_live_pitch_kind",
+      "service": "samples",
+      "call": true,
+      "after": "00e32353"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8d58f5c2",
+      "file_offset": "0x1c681e",
+      "length": 4,
+      "before": "ffe3bdb0",
+      "symbol": "sdk_sample_octave_store",
+      "service": "samples",
+      "call": true,
+      "after": "ffe3bdb0"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8c0b5b72",
+      "file_offset": "0xecdae",
+      "length": 8,
+      "before": "00de518dfcf10000",
+      "symbol": "sdk_synth_press",
+      "call": true,
+      "after": "00de2d8d34610000"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8c08fade",
+      "file_offset": "0xc6d1a",
+      "length": 8,
+      "before": "00de5a8dbcd50000",
+      "symbol": "sdk_effect_turn",
+      "call": true,
+      "after": "00de2d8da8630000"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8c0b15aa",
+      "file_offset": "0xe87e6",
+      "length": 8,
+      "before": "00de5a8dbcd50000",
+      "symbol": "sdk_synth_turn",
+      "call": true,
+      "after": "00de2d8d08630000"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8d4eed56",
+      "file_offset": "0x125fb2",
+      "length": 4,
+      "before": "ffe3c0fe",
+      "symbol": "sdk_preset_type",
+      "call": true,
+      "after": "efe39191"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8d5ad306",
+      "file_offset": "0x1e455e",
+      "length": 8,
+      "before": "00de0b8c68240000",
+      "symbol": "sdk_param_steps",
+      "call": true,
+      "after": "00de2d8d10620000"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8d53b636",
+      "file_offset": "0x172892",
+      "length": 4,
+      "before": "06e3dd2d",
+      "symbol": "sdk_fx_value",
+      "call": true,
+      "after": "ece353d4"
+    },
+    {
+      "kind": "hook",
+      "name": "Send page titles follow alternate selection",
+      "address": "0x8d53b642",
+      "file_offset": "0x17289e",
+      "length": 4,
+      "before": "fee3275b",
+      "symbol": "sdk_fx_title",
+      "call": true,
+      "after": "ece365d7"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8d5954b2",
+      "file_offset": "0x1cc70e",
+      "length": 4,
+      "before": "01e33d14",
+      "symbol": "sdk_note_off",
+      "call": true,
+      "after": "eae3c309"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8d595514",
+      "file_offset": "0x1cc770",
+      "length": 4,
+      "before": "01e30c14",
+      "symbol": "sdk_note_off",
+      "call": true,
+      "after": "eae39209"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8d585eda",
+      "file_offset": "0x1bd136",
+      "length": 4,
+      "before": "00e3cd98",
+      "symbol": "sdk_project_save",
+      "call": true,
+      "after": "eae39bd0"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8d58913e",
+      "file_offset": "0x1c039a",
+      "length": 4,
+      "before": "00e3e984",
+      "symbol": "sdk_project_load",
+      "call": true,
+      "after": "eae36bba"
+    },
+    {
+      "kind": "text",
+      "name": "MTP path allowlist: project companion (.oxy) beside each project (.xy)",
+      "address": "0x840ae494",
+      "file_offset": "0x5ca04",
+      "length": 28,
+      "before": "5e2f70726f6a656374732f776f726b73706163655c2e787924000000",
+      "after": "5e2f70726f6a656374732f776f726b73706163655c2e6f3f78792400"
+    },
+    {
+      "kind": "text",
+      "name": "MTP path allowlist: project companion (.oxy) beside each project (.xy)",
+      "address": "0x840ae4b0",
+      "file_offset": "0x5ca20",
+      "length": 64,
+      "before": "5e2f70726f6a656374732f5b5c775c645c215c2b5c2d5c405c5b5c5d20232d295d2b2f5b5c775c645c215c2b5c2d5c405c5b5c5d20232d295d2b5c2e78792400",
+      "after": "5e2f70726f6a656374732f5b5c775c215c2b5c2d5c405c5b5c5d20232d295d2b2f5b5c775c645c215c2b5c2d5c405c5b5c5d20232d295d2b5c2e6f3f78792400"
+    },
+    {
+      "kind": "text",
+      "name": "MTP path allowlist: project companion (.oxy) beside each project (.xy)",
+      "address": "0x840ae4f0",
+      "file_offset": "0x5ca60",
+      "length": 88,
+      "before": "5e2f70726f6a656374732f5b5c775c645c215c2b5c2d5c405c5b5c5d20232d295d2b2f5b5c775c645c215c2b5c2d5c405c5b5c5d20232d295d2b2f5b5c775c645c215c2b5c2d5c405c5b5c5d20232d295d2b5c2e78792400",
+      "after": "5e2f70726f6a656374732f5b5c775c215c2b5c2d5c405c5b5c5d20232d295d2b2f5b5c775c645c215c2b5c2d5c405c5b5c5d20232d295d2b2f5b5c775c645c215c2b5c2d5c405c5b5c5d20232d295d2b5c2e6f3f78792400"
+    },
+    {
+      "kind": "hook",
+      "address": "0x11a09322",
+      "file_offset": "0xc9b2",
+      "length": 8,
+      "before": "08da0308c04f0000",
+      "symbol": "sdk_profile_voice_start",
+      "call": true,
+      "profiling": false,
+      "after": "08da0308c04f0000"
+    },
+    {
+      "kind": "hook",
+      "address": "0x11a0963a",
+      "file_offset": "0xccca",
+      "length": 8,
+      "before": "09da0308c04f0000",
+      "symbol": "sdk_profile_osc_start",
+      "call": true,
+      "profiling": false,
+      "after": "09da0308c04f0000"
+    },
+    {
+      "kind": "hook",
+      "address": "0x11a0966c",
+      "file_offset": "0xccfc",
+      "length": 8,
+      "before": "08da0308c04f0000",
+      "symbol": "sdk_profile_osc_end",
+      "call": true,
+      "profiling": false,
+      "after": "08da0308c04f0000"
+    },
+    {
+      "kind": "hook",
+      "address": "0x11a097be",
+      "file_offset": "0xce4e",
+      "length": 8,
+      "before": "5db9c56f30009631",
+      "symbol": "sdk_profile_filter_start",
+      "call": true,
+      "profiling": false,
+      "after": "5db9c56f30009631"
+    },
+    {
+      "kind": "hook",
+      "address": "0x11a0985c",
+      "file_offset": "0xceec",
+      "length": 8,
+      "before": "59b9300096318f31",
+      "symbol": "sdk_profile_filter_end",
+      "call": true,
+      "profiling": false,
+      "after": "59b9300096318f31"
+    },
+    {
+      "kind": "hook",
+      "address": "0x11a09ac4",
+      "file_offset": "0xd154",
+      "length": 8,
+      "before": "59b9300096318f31",
+      "symbol": "sdk_profile_voice_end",
+      "call": true,
+      "profiling": false,
+      "after": "59b9300096318f31"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8d51b288",
+      "file_offset": "0x1524e4",
+      "length": 8,
+      "before": "08da0308c04f0000",
+      "symbol": "sdk_profile_alt_voice_start",
+      "call": true,
+      "profiling": false,
+      "after": "08da0308c04f0000"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8d51b52a",
+      "file_offset": "0x152786",
+      "length": 8,
+      "before": "09da0308c04f0000",
+      "symbol": "sdk_profile_alt_osc_start",
+      "call": true,
+      "profiling": false,
+      "after": "09da0308c04f0000"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8d51b55c",
+      "file_offset": "0x1527b8",
+      "length": 8,
+      "before": "08da0308c04f0000",
+      "symbol": "sdk_profile_alt_osc_end",
+      "call": true,
+      "profiling": false,
+      "after": "08da0308c04f0000"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8d51b78e",
+      "file_offset": "0x1529ea",
+      "length": 8,
+      "before": "300096318f314000",
+      "symbol": "sdk_profile_alt_voice_end",
+      "call": true,
+      "profiling": false,
+      "after": "300096318f314000"
+    },
+    {
+      "kind": "hook",
+      "name": "LFO destination range on Element selector initialization",
+      "address": "0x8d53f828",
+      "file_offset": "0x176a84",
+      "length": 4,
+      "before": "fce380bb",
+      "symbol": "sdk_lfo_range",
+      "call": true,
+      "after": "ede38808"
+    },
+    {
+      "kind": "hook",
+      "name": "LFO destination range on Element page",
+      "address": "0x8d53fb18",
+      "file_offset": "0x176d74",
+      "length": 4,
+      "before": "fce308ba",
+      "symbol": "sdk_lfo_range",
+      "call": true,
+      "after": "ede31007"
+    },
+    {
+      "kind": "hook",
+      "name": "LFO destination range on Random page",
+      "address": "0x8d540afa",
+      "file_offset": "0x177d56",
+      "length": 4,
+      "before": "fce317b2",
+      "symbol": "sdk_lfo_range",
+      "call": true,
+      "after": "ece31fff"
+    },
+    {
+      "kind": "hook",
+      "name": "LFO destination range on Value page",
+      "address": "0x8d543280",
+      "file_offset": "0x17a4dc",
+      "length": 4,
+      "before": "fce3549e",
+      "symbol": "sdk_lfo_range",
+      "call": true,
+      "after": "ece35ceb"
+    },
+    {
+      "kind": "hook",
+      "name": "LFO destination stepping in parameter locks",
+      "address": "0x8d5ad4ba",
+      "file_offset": "0x1e4712",
+      "length": 4,
+      "before": "ffe317ff",
+      "symbol": "sdk_lfo_step",
+      "call": true,
+      "after": "e9e30d9b"
+    },
+    {
+      "kind": "hook",
+      "name": "LFO destination stepping in live controls",
+      "address": "0x8d5ad59e",
+      "file_offset": "0x1e47f6",
+      "length": 4,
+      "before": "ffe3a5fe",
+      "symbol": "sdk_lfo_step",
+      "call": true,
+      "after": "e9e39b9a"
+    },
+    {
+      "kind": "hook",
+      "name": "LFO engine destination audio routing",
+      "address": "0x11a04260",
+      "file_offset": "0x78f0",
+      "length": 8,
+      "before": "00de518dc48e0000",
+      "symbol": "sdk_lfo_audio",
+      "call": true,
+      "after": "00de2e8d680c0000"
+    },
+    {
+      "kind": "hook",
+      "name": "Synth engine page titles follow alternate selection",
+      "address": "0x8d5466f6",
+      "file_offset": "0x17d952",
+      "length": 4,
+      "before": "fee3ab02",
+      "symbol": "sdk_synth_title",
+      "call": true,
+      "after": "ece3ff7c"
+    },
+    {
+      "kind": "hook",
+      "name": "LFO Element destination knob icons",
+      "address": "0x8d54023e",
+      "file_offset": "0x17749a",
+      "length": 4,
+      "before": "06e36b0f",
+      "symbol": "sdk_lfo_element_icon",
+      "call": true,
+      "after": "ede32105"
+    },
+    {
+      "kind": "hook",
+      "name": "LFO Random destination knob icons",
+      "address": "0x8d541736",
+      "file_offset": "0x178992",
+      "length": 4,
+      "before": "06e3ef04",
+      "symbol": "sdk_lfo_random_icon",
+      "call": true,
+      "after": "ece3b7fa"
+    },
+    {
+      "kind": "hook",
+      "name": "LFO Value destination knob icons",
+      "address": "0x8d543d92",
+      "file_offset": "0x17afee",
+      "length": 4,
+      "before": "05e3c1f1",
+      "symbol": "sdk_lfo_value_icon",
+      "call": true,
+      "after": "ece39be7"
+    },
+    {
+      "kind": "hook",
+      "name": "LFO Element extra destination icon visibility",
+      "address": "0x8d53ffb0",
+      "file_offset": "0x17720c",
+      "length": 4,
+      "before": "fce3ecbf",
+      "symbol": "sdk_lfo_element_name",
+      "call": true,
+      "after": "ede39e06"
+    },
+    {
+      "kind": "hook",
+      "name": "LFO Element initial knob icon offset",
+      "address": "0x8d53f888",
+      "file_offset": "0x176ae4",
+      "length": 8,
+      "before": "504f79c20820b14f",
+      "symbol": "sdk_lfo_element_initial_icon",
+      "call": true,
+      "after": "00de2e8d040d0000"
+    },
+    {
+      "kind": "hook",
+      "name": "LFO destination encoder click cycle",
+      "address": "0x8c0b2d54",
+      "file_offset": "0xe9f90",
+      "length": 8,
+      "before": "00de5a8d28cf0000",
+      "symbol": "sdk_lfo_cycle",
+      "call": true,
+      "after": "00de2e8d240a0000"
+    },
+    {
+      "kind": "hook",
+      "name": "LFO Random effective destination label",
+      "address": "0x8d54107e",
+      "file_offset": "0x1782da",
+      "length": 4,
+      "before": "fce385b7",
+      "symbol": "sdk_lfo_label",
+      "call": true,
+      "after": "ece3abfc"
+    },
+    {
+      "kind": "hook",
+      "name": "LFO Value effective destination label",
+      "address": "0x8d543970",
+      "file_offset": "0x17abcc",
+      "length": 4,
+      "before": "fce30ca3",
+      "symbol": "sdk_lfo_label",
+      "call": true,
+      "after": "ece332e8"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8d5aec5a",
+      "file_offset": "0x1e5eb2",
+      "length": 4,
+      "before": "fee3b16f",
+      "symbol": "sdk_benchmark_run",
+      "call": true,
+      "after": "e9e3af36"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8c0baaf0",
+      "file_offset": "0xf1d2c",
+      "length": 8,
+      "before": "00de598db8860000",
+      "symbol": "sdk_extensions_controller_update",
+      "call": true,
+      "service": "extensions",
+      "events": [
+        "context"
+      ],
+      "after": "00de598db8860000"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8c0b6184",
+      "file_offset": "0xed3c0",
+      "length": 12,
+      "before": "ffe3eafd00da0208783c0000",
+      "symbol": "sdk_extensions_key_queue",
+      "call": true,
+      "service": "extensions",
+      "events": [
+        "queued_control"
+      ],
+      "after": "ffe3eafd00da0208783c0000"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8d594376",
+      "file_offset": "0x1cb5d2",
+      "length": 4,
+      "before": "00e3e109",
+      "symbol": "sdk_extensions_live_note_on",
+      "call": true,
+      "service": "extensions",
+      "events": [
+        "input_activity",
+        "recordable_note_on"
+      ],
+      "after": "00e3e109"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8d59420a",
+      "file_offset": "0x1cb466",
+      "length": 4,
+      "before": "00e30b09",
+      "symbol": "sdk_extensions_live_note_off",
+      "call": true,
+      "service": "extensions",
+      "events": [
+        "selected_note_off"
+      ],
+      "after": "00e30b09"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8d59819c",
+      "file_offset": "0x1cf3f8",
+      "length": 4,
+      "before": "ffe3b7c4",
+      "symbol": "sdk_extensions_recorder_tick",
+      "call": true,
+      "service": "extensions",
+      "events": [
+        "recording_tick"
+      ],
+      "after": "ffe3b7c4"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8d597db8",
+      "file_offset": "0x1cf014",
+      "length": 4,
+      "before": "ffe3d6cd",
+      "symbol": "sdk_extensions_stop",
+      "call": true,
+      "service": "extensions",
+      "events": [
+        "context"
+      ],
+      "after": "ffe3d6cd"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8d595844",
+      "file_offset": "0x1ccaa0",
+      "length": 4,
+      "before": "01e38812",
+      "symbol": "sdk_extensions_note_accepted",
+      "call": true,
+      "service": "extensions",
+      "events": [
+        "recordable_note_on"
+      ],
+      "after": "01e38812"
+    },
+    {
+      "kind": "startup",
+      "name": "Boot-screen version label",
+      "address": "0x8c0b85dc",
+      "file_offset": "0xef818",
+      "length": 10,
+      "before": "32e412000207ffe34bf5",
+      "symbol": "kit_startup_label",
+      "after": "00dc2d8d245900000000"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8c0b2e68",
+      "file_offset": "0xea0a4",
+      "length": 8,
+      "before": "00de588d1c780000",
+      "symbol": "sdk_sample_pad_key_engine",
+      "service": "samples",
+      "call": true,
+      "after": "00de588d1c780000"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8c0b214e",
+      "file_offset": "0xe938a",
+      "length": 8,
+      "before": "00de588d1c780000",
+      "symbol": "sdk_sample_pad_key_engine",
+      "service": "samples",
+      "call": true,
+      "after": "00de588d1c780000"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8c0b31e0",
+      "file_offset": "0xea41c",
+      "length": 8,
+      "before": "00de588d341f0000",
+      "symbol": "sdk_sample_pad_copy",
+      "service": "samples",
+      "call": true,
+      "after": "00de588d341f0000"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8c0b3256",
+      "file_offset": "0xea492",
+      "length": 8,
+      "before": "00de588d901f0000",
+      "symbol": "sdk_sample_pad_paste",
+      "service": "samples",
+      "call": true,
+      "after": "00de588d901f0000"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8c094710",
+      "file_offset": "0xcb94c",
+      "length": 8,
+      "before": "00de4d8db0630000",
+      "symbol": "sdk_sample_multi_control",
+      "service": "samples",
+      "call": true,
+      "after": "00de4d8db0630000"
+    },
+    {
+      "kind": "hook",
+      "address": "0x8c0949e0",
+      "file_offset": "0xcbc1c",
+      "length": 8,
+      "before": "00de588d1c780000",
+      "symbol": "sdk_sample_multi_press_engine",
+      "service": "samples",
+      "call": true,
+      "after": "00de588d1c780000"
+    }
+  ],
+  "linked": [
+    "medievalwind"
+  ],
+  "services": [],
+  "device_operations": false,
+  "hardware_tested": false,
+  "cpu_timing_measured": false
+}

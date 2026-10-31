@@ -1,0 +1,13 @@
+voice.cpp:93:13:void begin(Slot&, Handle*, opxy::u32)	0	static
+voice.cpp:260:12:int zero()	0	static
+voice.cpp:261:13:void noop()	0	static
+voice.cpp:208:13:void end(Handle*)	0	static
+voice.cpp:217:5:int medievalwind_destroy(void*)	0	static
+voice.cpp:127:13:bool ended(Slot&, opxy::u32)	0	static
+voice.cpp:133:13:void sweep(opxy::u32)	0	static
+voice.cpp:153:13:void acquire(Handle*, opxy::u32, bool)	8	static
+voice.cpp:186:5:int medievalwind_start(void*)	0	static
+engine.cpp:580:13:void medievalwind::render(medievalwind::Voice&, medievalwind::Shared&, opxy::u32, Output, Parameters, Pitch)	844	static
+voice.cpp:230:5:int medievalwind_render(void*, opxy::i32*, const i32*)	0	static
+voice.cpp:223:7:void* medievalwind_factory(opxy::u32)	0	static
+voice.cpp:265:13:const char* medievalwind_parameter_name(opxy::u32)	0	static

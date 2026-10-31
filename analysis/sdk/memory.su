@@ -1,0 +1,2 @@
+memory.cpp:3:18:void* memset(void*, int, size_t)	0	static
+memory.cpp:8:18:void* memcpy(void*, const void*, size_t)	0	static

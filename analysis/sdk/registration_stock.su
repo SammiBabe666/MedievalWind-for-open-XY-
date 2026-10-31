@@ -1,0 +1,9 @@
+registration_stock.cpp:32:6:void {anonymous}::add_engine(const opxy::platform::Record&, opxy::u32, opxy::u32)	0	static
+registration_stock.cpp:36:6:void {anonymous}::add_effect(const opxy::platform::Record&, opxy::u32, opxy::u32)	0	static
+registration_stock.cpp:48:5:int sdk_register_engine(const opxy::platform::Record*)	0	static
+registration_stock.cpp:49:5:int sdk_register_effect(const opxy::platform::Record*)	0	static
+registration_stock.cpp:50:5:int sdk_register_screen(const opxy::platform::Record*, const opxy::platform::Screen*)	0	static
+registration_stock.cpp:51:5:int sdk_engine_ready(const opxy::platform::Record*, const opxy::platform::Screen*)	0	static
+registration_stock.cpp:52:5:int sdk_effect_ready(const opxy::platform::Record*)	0	static
+registration_stock.cpp:53:5:int sdk_stock_engine_known(const void*)	0	static
+registration_stock.cpp:54:5:int sdk_name_matches(const opxy::platform::Record*, const void*)	0	static

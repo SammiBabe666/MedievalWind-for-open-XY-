@@ -1,0 +1,4 @@
+screen.hpp:202:30:void opxy::screen::{anonymous}::destroy(Object*) [with Object = opxy::screen::{anonymous}::Drawing<{anonymous}::Machine>::Object]	0	static
+screen_drawing.hpp:139:17:static void opxy::screen::{anonymous}::Drawing<Machine>::frame(opxy::screen::{anonymous}::Drawing<Machine>::Object*, opxy::i32) [with Machine = {anonymous}::Machine]	164	static
+screen_drawing.hpp:50:17:static void opxy::screen::{anonymous}::Drawing<Machine>::init(opxy::screen::{anonymous}::Drawing<Machine>::Object*) [with Machine = {anonymous}::Machine]	0	static
+screen.cpp:101:1:opxy::screen::{anonymous}::Drawing<{anonymous}::Machine>::Object* opxy_screen_ctor(opxy::screen::{anonymous}::Drawing<{anonymous}::Machine>::Object*, opxy::u32)	0	static

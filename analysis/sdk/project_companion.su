@@ -1,0 +1,13 @@
+project_companion.cpp:74:6:bool {anonymous}::measure(const char*, unsigned char*, opxy::u32&, opxy::u32&)	0	static
+project_companion.cpp:87:6:bool {anonymous}::companion_path(const char*, char*)	0	static
+project_companion.cpp:204:9:int {anonymous}::Source::peek()	0	static
+project_companion.cpp:453:17:static void {anonymous}::Parser::put({anonymous}::Text&, opxy::u32)	4	static
+project_companion.cpp:259:9:int {anonymous}::Parser::peek()	0	static
+project_companion.cpp:271:10:bool {anonymous}::Parser::string({anonymous}::Text&)	12	static
+project_companion.cpp:323:10:bool {anonymous}::Parser::number({anonymous}::Number&)	0	static
+project_companion.cpp:369:10:bool {anonymous}::Parser::skip(opxy::u32)	84	static
+project_companion.cpp:358:10:bool {anonymous}::Parser::natural(opxy::u32&, bool&)	8	static
+project_companion.cpp:581:6:bool {anonymous}::machines_section({anonymous}::Parser&, bool&, bool&)	264	static
+project_companion.cpp:686:6:bool {anonymous}::read_document({anonymous}::File*, opxy::u32&, opxy::u32&)	260	static
+project_companion.cpp:764:5:opxy::u32 sdk_project_save(void*, const char*)	32	static
+project_companion.cpp:774:5:opxy::u32 sdk_project_load(void*, const char*)	16	static

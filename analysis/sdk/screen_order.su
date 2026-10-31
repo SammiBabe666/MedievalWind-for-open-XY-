@@ -1,0 +1,2 @@
+screen_order.cpp:19:11:opxy::u32 sdk_screen_next(opxy::platform::ScreenCursor*, opxy::u32)	0	static
+screen_order.cpp:28:11:opxy::u32 sdk_screen_activation(opxy::u32, opxy::u32)	0	static

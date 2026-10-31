@@ -1,0 +1,345 @@
+
+Discarded input sections
+
+ .comment       0x0000000000000000       0x2a medievalwind/voice.o
+ .comment       0x0000000000000000       0x2a medievalwind/display.o
+ .comment       0x0000000000000000       0x2a medievalwind/screen.o
+ .comment       0x0000000000000000       0x2a medievalwind/registration.o
+ .comment       0x0000000000000000       0x2a sdk/memory.o
+ .comment       0x0000000000000000       0x2a sdk/registration.o
+ .comment       0x0000000000000000       0x2a sdk/registration_stock.o
+ .comment       0x0000000000000000       0x2a sdk/startup.o
+ .comment       0x0000000000000000       0x2a sdk/benchmark.o
+ .comment       0x0000000000000000       0x2a sdk/screen_order.o
+ .comment       0x0000000000000000       0x2a sdk/synth_controls.o
+ .comment       0x0000000000000000       0x2a sdk/synth_control_table.o
+ .comment       0x0000000000000000       0x2a sdk/note_activity.o
+ .comment       0x0000000000000000       0x2a sdk/project_companion.o
+ .comment       0x0000000000000000       0x2a sdk/project_companion_table.o
+ .comment       0x0000000000000000       0x2a sdk/lfo.o
+ .comment       0x0000000000000000       0x2a sdk/lfo_stock.o
+ .comment       0x0000000000000000       0x2a sdk/stock_browser.o
+ .comment       0x0000000000000000       0x2a sdk/presets.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+MODULE           0x000000008d2d0380 0x00000000001fc000 xrw
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+                0x000000008d2d0380                __extensions_reserved_start = ORIGIN (MODULE)
+                0x000000008d4cc380                __extensions_reserved_end = (ORIGIN (MODULE) + LENGTH (MODULE))
+                0x000000008d4cc380                __stock_effect_records = 0x8d4cc380
+                0x000000008d4ccf50                __stock_engine_records = 0x8d4ccf50
+                0x000000008d4cff50                __stock_screen_slots = 0x8d4cff50
+
+.text           0x000000008d2d0380    0x10d54
+ *(.text .text.*)
+ .text          0x000000008d2d0380     0x2114 medievalwind/voice.o
+                0x000000008d2d0570                medievalwind_destroy
+                0x000000008d2d0860                medievalwind_start
+                0x000000008d2d21ec                medievalwind_render
+                0x000000008d2d2438                medievalwind_factory
+                0x000000008d2d2474                medievalwind_parameter_name
+ .text          0x000000008d2d2494      0x198 medievalwind/display.o
+                0x000000008d2d2494                medievalwind_display_reset
+                0x000000008d2d24c8                medievalwind_display_render
+                0x000000008d2d24d4                medievalwind_display_validate
+ .text._ZN12medievalwind7displayERNS_12DisplayStateERKN4opxy4draw5InputERNS3_5FrameILm4ELm64ELm58ELm16ELm16EEE
+                0x000000008d2d262c     0x222c medievalwind/display.o
+                0x000000008d2d262c                medievalwind::display(medievalwind::DisplayState&, opxy::draw::Input const&, opxy::draw::Frame<4ul, 64ul, 58ul, 16ul, 16ul>&)
+ .text          0x000000008d2d4858      0xa40 medievalwind/screen.o
+                0x000000008d2d5258                medievalwind_screen_ctor
+ .text          0x000000008d2d5298       0x54 medievalwind/registration.o
+                0x000000008d2d5298                medievalwind_screen_register
+                0x000000008d2d52ac                medievalwind_register
+                0x000000008d2d52b8                medievalwind_record_ready
+                0x000000008d2d52c8                medievalwind_name_matches
+                0x000000008d2d52d8                medievalwind_ready
+ .text          0x000000008d2d52ec       0xa4 sdk/divide.o
+                0x000000008d2d52ec                __udivsi3
+                0x000000008d2d533e                __umodsi3
+                0x000000008d2d534a                __divsi3
+                0x000000008d2d536c                __modsi3
+ .text          0x000000008d2d5390       0x24 sdk/memory.o
+                0x000000008d2d5390                memset
+                0x000000008d2d53a0                memcpy
+ .text          0x000000008d2d53b4      0x37c sdk/registration.o
+                0x000000008d2d5420                opxy::platform::registry::add(opxy::platform::registry::Registry const&, opxy::platform::registry::Pages const&, opxy::platform::Record const&)
+                0x000000008d2d552c                opxy::platform::registry::add_screen(opxy::platform::registry::Pages const&, opxy::platform::Record const&, opxy::platform::Screen const&)
+                0x000000008d2d55e0                opxy::platform::registry::ready(opxy::platform::registry::Registry const&, opxy::platform::registry::Pages const&, opxy::platform::Record const&, opxy::platform::Screen const*)
+                0x000000008d2d567c                opxy::platform::registry::known(opxy::platform::registry::Registry const&, opxy::platform::registry::StockString const*)
+                0x000000008d2d56ac                opxy::platform::registry::name_matches(opxy::platform::Record const&, opxy::platform::registry::StockString const*)
+ .text          0x000000008d2d5730       0xf0 sdk/registration_stock.o
+                0x000000008d2d5730                sdk_engine_bound
+                0x000000008d2d5784                sdk_register_engine
+                0x000000008d2d579c                sdk_register_effect
+                0x000000008d2d57b4                sdk_register_screen
+                0x000000008d2d57c4                sdk_engine_ready
+                0x000000008d2d57e8                sdk_effect_ready
+                0x000000008d2d580c                sdk_stock_engine_known
+                0x000000008d2d581c                sdk_name_matches
+ .text          0x000000008d2d5820       0xe0 sdk/startup.o
+                0x000000008d2d5820                kit_absent
+                0x000000008d2d5824                sdk_startup_synth
+                0x000000008d2d5840                sdk_startup_screen
+                0x000000008d2d585c                extensions_catalog_checked
+                0x000000008d2d58a8                sdk_screen_owned
+                0x000000008d2d58d0                sdk_engine_installed
+ .text          0x000000008d2d5900       0x24 sdk/startup_exit.o
+                0x000000008d2d5900                extensions_synth_exit
+                0x000000008d2d5914                extensions_screen_exit
+ .text          0x000000008d2d5924        0x0 sdk/startup_label.o
+ .text.kit_startup_label
+                0x000000008d2d5924       0x1c sdk/startup_label.o
+                0x000000008d2d5924                kit_startup_label
+ .text          0x000000008d2d5940      0x378 sdk/benchmark.o
+                0x000000008d2d5940                opxy::benchmark::allocate(unsigned long)
+                0x000000008d2d59ac                opxy::benchmark::release(void*)
+                0x000000008d2d59b8                sdk_benchmark_run
+ .text          0x000000008d2d5cb8        0x4 sdk/benchmark_clock.o
+                0x000000008d2d5cb8                sdk_benchmark_cycles
+ .text          0x000000008d2d5cbc       0x10 sdk/voice_clock.o
+                0x000000008d2d5cbc                sdk_voice_ticks
+ .text          0x000000008d2d5ccc       0xa0 sdk/hook.o
+                0x000000008d2d5ccc                sdk_hook_save
+                0x000000008d2d5d24                sdk_hook_restore
+ .text          0x000000008d2d5d6c      0x148 sdk/screen_order.o
+                0x000000008d2d5d6c                sdk_screen_next
+                0x000000008d2d5e78                sdk_screen_activation
+ .text          0x000000008d2d5eb4       0x48 sdk/screen_hooks.o
+                0x000000008d2d5eb4                sdk_screen_advance
+                0x000000008d2d5edc                sdk_fx_value
+ .text          0x000000008d2d5efc      0x8e8 sdk/synth_controls.o
+                0x000000008d2d607c                sdk_synth_shown
+                0x000000008d2d60b8                sdk_synth_title_slot
+                0x000000008d2d60f4                sdk_synth_title
+                0x000000008d2d6134                sdk_synth_press
+                0x000000008d2d6210                sdk_param_steps
+                0x000000008d2d6308                sdk_synth_turn
+                0x000000008d2d63a8                sdk_effect_turn
+                0x000000008d2d6428                sdk_fx_value_text
+                0x000000008d2d650c                sdk_fx_title
+                0x000000008d2d655c                sdk_synth_value
+                0x000000008d2d658c                sdk_send_refresh
+                0x000000008d2d6634                opxy::platform::control_tenths(char*, unsigned long, char const*)
+                0x000000008d2d6718                opxy::platform::control_division(char*, long)
+                0x000000008d2d675c                opxy::platform::control_choice(long, unsigned long)
+                0x000000008d2d676c                opxy::platform::control_label(char*, long, char const* const*, unsigned long)
+                0x000000008d2d67a0                opxy::platform::control_ratio(long, unsigned long const*, unsigned long)
+ .text          0x000000008d2d67e4       0x54 sdk/synth_control_table.o
+ .text          0x000000008d2d6838       0xb8 sdk/note_activity.o
+                0x000000008d2d6838                sdk_note_off
+                0x000000008d2d68a0                sdk_display_note_activity
+ .text          0x000000008d2d68f0     0x9e74 sdk/project_companion.o
+                0x000000008d2e0010                sdk_project_save
+                0x000000008d2e0614                sdk_project_load
+ .text          0x000000008d2e0764        0x0 sdk/project_companion_table.o
+ .text          0x000000008d2e0764       0x78 sdk/profiling.o
+                0x000000008d2e0764                sdk_profile_voice_start
+                0x000000008d2e076e                sdk_profile_osc_start
+                0x000000008d2e0778                sdk_profile_osc_end
+                0x000000008d2e0788                sdk_profile_filter_start
+                0x000000008d2e0792                sdk_profile_filter_end
+                0x000000008d2e07a0                sdk_profile_voice_end
+                0x000000008d2e07ae                sdk_profile_alt_voice_start
+                0x000000008d2e07b8                sdk_profile_alt_osc_start
+                0x000000008d2e07c2                sdk_profile_alt_osc_end
+                0x000000008d2e07d0                sdk_profile_alt_voice_end
+ .text          0x000000008d2e07dc      0x3dc sdk/lfo.o
+                0x000000008d2e0938                sdk_lfo_range
+                0x000000008d2e0968                sdk_lfo_icon_slide
+                0x000000008d2e09c0                sdk_lfo_icon_slot
+                0x000000008d2e09d4                sdk_lfo_label
+                0x000000008d2e0a24                sdk_lfo_cycle
+                0x000000008d2e0a90                sdk_lfo_element_label
+                0x000000008d2e0ad4                sdk_lfo_step
+                0x000000008d2e0b60                sdk_lfo_modulate
+ .text          0x000000008d2e0bb8       0xb0 sdk/lfo_stock.o
+                0x000000008d2e0bb8                opxy::platform::lfo::gui_engine(unsigned long)
+                0x000000008d2e0bc4                opxy::platform::lfo::audio_engine(unsigned long)
+                0x000000008d2e0bd4                opxy::platform::lfo::type(unsigned long)
+                0x000000008d2e0be0                opxy::platform::lfo::selected_track()
+                0x000000008d2e0bec                opxy::platform::lfo::animate(unsigned long, unsigned long, long, unsigned long)
+                0x000000008d2e0bf8                opxy::platform::lfo::name(unsigned long, unsigned long, unsigned long)
+                0x000000008d2e0c04                opxy::platform::lfo::show(unsigned long)
+                0x000000008d2e0c14                opxy::platform::lfo::group_value(unsigned long)
+                0x000000008d2e0c2c                opxy::platform::lfo::step(unsigned long, unsigned long, long, long const*)
+                0x000000008d2e0c38                opxy::platform::lfo::value(unsigned long, unsigned long, unsigned long)
+                0x000000008d2e0c44                opxy::platform::lfo::publish(unsigned long, unsigned long, unsigned long, long)
+                0x000000008d2e0c50                opxy::platform::lfo::modulation_slot(unsigned long)
+                0x000000008d2e0c5c                opxy::platform::lfo::modulate(unsigned long, unsigned long, unsigned long, long)
+ .text          0x000000008d2e0c68       0xc0 sdk/lfo_hooks.o
+                0x000000008d2e0c68                sdk_lfo_audio
+                0x000000008d2e0c80                sdk_lfo_element_icon
+                0x000000008d2e0ca4                sdk_lfo_random_icon
+                0x000000008d2e0cc8                sdk_lfo_value_icon
+                0x000000008d2e0cec                sdk_lfo_element_name
+                0x000000008d2e0d04                sdk_lfo_element_initial_icon
+ .text          0x000000008d2e0d28      0x350 sdk/stock_browser.o
+                0x000000008d2e0e98                opxy::platform::stock_browser::detail::open(opxy::platform::stock_browser::detail::Session&, opxy::platform::stock_browser::detail::Row*, unsigned long, char const*, char const* const*, unsigned long, opxy::platform::stock_browser::Callbacks)
+ .text          0x000000008d2e1078       0x5c sdk/presets.o
+                0x000000008d2e1078                sdk_preset_type
+
+.rodata         0x000000008d2e10d4     0x145c
+ *(.rodata .rodata.* .data.rel.ro .data.rel.ro.*)
+ .rodata.str1.4
+                0x000000008d2e10d4       0x44 medievalwind/voice.o
+ .rodata        0x000000008d2e1118       0x5c medievalwind/voice.o
+                0x000000008d2e1118                medievalwind_vtable
+                0x000000008d2e1164                medievalwind_name
+ .rodata._ZN12medievalwind7displayERNS_12DisplayStateERKN4opxy4draw5InputERNS3_5FrameILm4ELm64ELm58ELm16ELm16EEE.str1.4
+                0x000000008d2e1174       0x44 medievalwind/display.o
+ .rodata        0x000000008d2e11b8      0x1a0 medievalwind/display.o
+ .rodata        0x000000008d2e1358      0x1ac medievalwind/screen.o
+                0x000000008d2e1370                medievalwind_screen_vtable
+                0x000000008d2e1388                medievalwind_screen_asset
+ .rodata.str1.4
+                0x000000008d2e1504      0x820 medievalwind/screen.o
+ .rodata        0x000000008d2e1d24       0x2c medievalwind/registration.o
+ .rodata        0x000000008d2e1d50       0x40 sdk/registration_stock.o
+ .rodata.kit_startup_label
+                0x000000008d2e1d90       0x14 sdk/startup_label.o
+                0x000000008d2e1d90                kit_startup_label_text
+ .rodata        0x000000008d2e1da4      0x3dc sdk/benchmark.o
+ .rodata.str1.4
+                0x000000008d2e2180       0x10 sdk/benchmark.o
+ .rodata.str1.4
+                0x000000008d2e2190       0x40 sdk/synth_controls.o
+ .rodata        0x000000008d2e21d0       0x20 sdk/synth_controls.o
+ .rodata.str1.4
+                0x000000008d2e21f0        0x4 sdk/synth_control_table.o
+ .rodata        0x000000008d2e21f4       0x98 sdk/synth_control_table.o
+                0x000000008d2e2214                sdk_lfo_machine_count
+                0x000000008d2e2218                sdk_lfo_machines
+                0x000000008d2e2240                sdk_synth_control_count
+                0x000000008d2e2244                sdk_synth_controls
+ .rodata.str1.4
+                0x000000008d2e228c      0x234 sdk/project_companion.o
+ .rodata.str1.4
+                0x000000008d2e24c0       0x10 sdk/project_companion_table.o
+ .rodata        0x000000008d2e24d0       0x20 sdk/project_companion_table.o
+                0x000000008d2e24d0                sdk_companion_machines
+ .rodata        0x000000008d2e24f0       0x40 sdk/stock_browser.o
+
+.data           0x000000008d2e2530        0x4
+ *(.data .data.* .sdata .sdata.*)
+ .data          0x000000008d2e2530        0x4 medievalwind/voice.o
+ .data          0x000000008d2e2534        0x0 medievalwind/display.o
+ .data          0x000000008d2e2534        0x0 medievalwind/screen.o
+ .data          0x000000008d2e2534        0x0 medievalwind/registration.o
+ .data          0x000000008d2e2534        0x0 sdk/divide.o
+ .data          0x000000008d2e2534        0x0 sdk/memory.o
+ .data          0x000000008d2e2534        0x0 sdk/registration.o
+ .data          0x000000008d2e2534        0x0 sdk/registration_stock.o
+ .data          0x000000008d2e2534        0x0 sdk/startup.o
+ .data          0x000000008d2e2534        0x0 sdk/startup_exit.o
+ .data          0x000000008d2e2534        0x0 sdk/startup_label.o
+ .data          0x000000008d2e2534        0x0 sdk/benchmark.o
+ .data          0x000000008d2e2534        0x0 sdk/benchmark_clock.o
+ .data          0x000000008d2e2534        0x0 sdk/voice_clock.o
+ .data          0x000000008d2e2534        0x0 sdk/hook.o
+ .data          0x000000008d2e2534        0x0 sdk/screen_order.o
+ .data          0x000000008d2e2534        0x0 sdk/screen_hooks.o
+ .data          0x000000008d2e2534        0x0 sdk/synth_controls.o
+ .data          0x000000008d2e2534        0x0 sdk/synth_control_table.o
+ .data          0x000000008d2e2534        0x0 sdk/note_activity.o
+ .data          0x000000008d2e2534        0x0 sdk/project_companion.o
+ .data          0x000000008d2e2534        0x0 sdk/project_companion_table.o
+ .data          0x000000008d2e2534        0x0 sdk/profiling.o
+ .data          0x000000008d2e2534        0x0 sdk/lfo.o
+ .data          0x000000008d2e2534        0x0 sdk/lfo_stock.o
+ .data          0x000000008d2e2534        0x0 sdk/lfo_hooks.o
+ .data          0x000000008d2e2534        0x0 sdk/stock_browser.o
+ .data          0x000000008d2e2534        0x0 sdk/presets.o
+                0x000000008d2e2534                __extensions_initialized_end = .
+
+.bss            0x000000008d2e2534    0x20710
+                0x000000008d2e2534                __extensions_bss_start = .
+ *(.bss .bss.* .sbss .sbss.* COMMON)
+ .bss           0x000000008d2e2534    0x1ad88 medievalwind/voice.o
+ .bss           0x000000008d2fd2bc        0x0 medievalwind/display.o
+ .bss           0x000000008d2fd2bc     0x14b0 medievalwind/screen.o
+                0x000000008d2fd2bc                medievalwind_screen_state
+ .bss           0x000000008d2fe76c        0x0 medievalwind/registration.o
+ .bss           0x000000008d2fe76c        0x0 sdk/divide.o
+ .bss           0x000000008d2fe76c        0x0 sdk/memory.o
+ .bss           0x000000008d2fe76c        0x0 sdk/registration.o
+ .bss           0x000000008d2fe76c        0x0 sdk/registration_stock.o
+ .bss           0x000000008d2fe76c        0x0 sdk/startup.o
+ .bss           0x000000008d2fe76c        0x0 sdk/startup_exit.o
+ .bss           0x000000008d2fe76c        0x0 sdk/startup_label.o
+ .bss           0x000000008d2fe76c       0x28 sdk/benchmark.o
+                0x000000008d2fe76c                sdk_benchmark_engine
+                0x000000008d2fe770                sdk_benchmark_parameters
+ .bss           0x000000008d2fe794        0x0 sdk/benchmark_clock.o
+ .bss           0x000000008d2fe794        0x0 sdk/voice_clock.o
+ .bss           0x000000008d2fe794        0x0 sdk/hook.o
+ .bss           0x000000008d2fe794       0x14 sdk/screen_order.o
+ .bss           0x000000008d2fe7a8        0x0 sdk/screen_hooks.o
+ .bss           0x000000008d2fe7a8       0x64 sdk/synth_controls.o
+ .bss           0x000000008d2fe80c        0x0 sdk/synth_control_table.o
+ .bss           0x000000008d2fe80c       0x20 sdk/note_activity.o
+ .bss           0x000000008d2fe82c     0x4414 sdk/project_companion.o
+ .bss           0x000000008d302c40        0x0 sdk/project_companion_table.o
+ .bss           0x000000008d302c40        0x0 sdk/profiling.o
+ .bss           0x000000008d302c40        0x0 sdk/lfo.o
+ .bss           0x000000008d302c40        0x0 sdk/lfo_stock.o
+ .bss           0x000000008d302c40        0x0 sdk/lfo_hooks.o
+ .bss           0x000000008d302c40        0x4 sdk/stock_browser.o
+ .bss           0x000000008d302c44        0x0 sdk/presets.o
+                0x000000008d302c44                __extensions_bss_end = .
+                0x000000008d302c44                __extensions_module_end = .
+
+.init_array     0x000000008d302c44        0x0
+ *(.init_array .init_array.* .ctors .ctors.*)
+
+.fini_array     0x000000008d302c44        0x0
+ *(.fini_array .fini_array.* .dtors .dtors.*)
+
+/DISCARD/
+ *(.comment .note* .eh_frame .eh_frame_hdr .gcc_except_table)
+                0x0000000000000001                ASSERT ((SIZEOF (.init_array) == 0x0), Static constructors are not run by the stock loader)
+                0x0000000000000001                ASSERT ((SIZEOF (.fini_array) == 0x0), Static destructors are not supported)
+                0x0000000000000001                ASSERT ((__extensions_reserved_end == __stock_effect_records), Module must end where the relocated tables begin)
+                0x0000000000000001                ASSERT (((__stock_effect_records + 0xbd0) == __stock_engine_records), Effect records overlap engine records)
+                0x0000000000000001                ASSERT (((__stock_engine_records + 0x3000) == __stock_screen_slots), Engine records overlap screen slots)
+                0x0000000000000001                ASSERT (((__stock_screen_slots + 0x400) <= 0x8d4d0380), Relocated tables exceed the reservation)
+                0x0000000000000001                ASSERT ((__extensions_module_end <= __extensions_reserved_end), Module overlaps the relocated tables)
+                0x000000008d5bd928                stock_catalog_insert = 0x8d5bd928
+                0x000000008d5c3eac                stock_gui_role = 0x8d5c3eac
+                0x000000008d5b79c6                stock_sample_classify_tail = 0x8d5b79c6
+                0x000000008d589214                stock_sample_key_tail = 0x8d589214
+                0x0000000000000044                medievalwind_engine_id = 0x44
+                0x0000000000000056                medievalwind_page_id = 0x56
+LOAD medievalwind/voice.o
+LOAD medievalwind/display.o
+LOAD medievalwind/screen.o
+LOAD medievalwind/registration.o
+LOAD sdk/divide.o
+LOAD sdk/memory.o
+LOAD sdk/registration.o
+LOAD sdk/registration_stock.o
+LOAD sdk/startup.o
+LOAD sdk/startup_exit.o
+LOAD sdk/startup_label.o
+LOAD sdk/benchmark.o
+LOAD sdk/benchmark_clock.o
+LOAD sdk/voice_clock.o
+LOAD sdk/hook.o
+LOAD sdk/screen_order.o
+LOAD sdk/screen_hooks.o
+LOAD sdk/synth_controls.o
+LOAD sdk/synth_control_table.o
+LOAD sdk/note_activity.o
+LOAD sdk/project_companion.o
+LOAD sdk/project_companion_table.o
+LOAD sdk/profiling.o
+LOAD sdk/lfo.o
+LOAD sdk/lfo_stock.o
+LOAD sdk/lfo_hooks.o
+LOAD sdk/stock_browser.o
+LOAD sdk/presets.o
+OUTPUT(module.elf elf32-bfin)

@@ -1,0 +1,18 @@
+synth_controls.cpp:63:22:const opxy::platform::SynthControls* {anonymous}::machine(opxy::u32, {anonymous}::Track*&)	0	static
+synth_controls.cpp:80:22:const opxy::platform::SynthControls* {anonymous}::send_effect(opxy::u32, {anonymous}::Track*&)	0	static
+synth_controls.cpp:112:6:void sdk_synth_shown(opxy::u32, opxy::u8*)	4	static
+synth_controls.cpp:117:5:opxy::u32 sdk_synth_title_slot(opxy::u32, opxy::u32)	0	static
+synth_controls.cpp:125:13:const char* sdk_synth_title(opxy::u32, opxy::u32)	0	static
+synth_controls.cpp:134:6:void sdk_synth_press(opxy::u32)	4	static
+synth_controls.cpp:158:5:opxy::u32 sdk_param_steps(opxy::u32, opxy::u32, opxy::u32*)	8	static
+synth_controls.cpp:171:5:opxy::u32 sdk_synth_turn(opxy::u32, opxy::u32, opxy::u32, opxy::u32)	16	static
+synth_controls.cpp:196:5:opxy::u32 sdk_effect_turn(opxy::u32, opxy::u32, opxy::u32, opxy::u32)	16	static
+synth_controls.cpp:211:5:opxy::u32 sdk_fx_value_text(opxy::u32, const char*, opxy::u32, opxy::i32)	4	static
+synth_controls.cpp:237:13:const char* sdk_fx_title(opxy::u32, opxy::u32)	4	static
+synth_controls.cpp:244:6:bool sdk_synth_value(opxy::u32, opxy::u32, opxy::i32, char*)	4	static
+synth_controls.cpp:255:6:void sdk_send_refresh()	4	static
+synth_controls.cpp:270:6:void opxy::platform::control_tenths(char*, opxy::u32, const char*)	12	static
+synth_controls.cpp:280:6:void opxy::platform::control_division(char*, opxy::i32)	0	static
+synth_controls.cpp:285:5:opxy::u32 opxy::platform::control_choice(opxy::i32, opxy::u32)	0	static
+synth_controls.cpp:288:6:void opxy::platform::control_label(char*, opxy::i32, const char* const*, opxy::u32)	0	static
+synth_controls.cpp:291:5:opxy::u32 opxy::platform::control_ratio(opxy::i32, const u32*, opxy::u32)	0	static

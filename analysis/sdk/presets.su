@@ -1,0 +1,1 @@
+presets.cpp:26:6:void sdk_preset_type(opxy::platform::registry::StockString*, const opxy::platform::registry::StockString*, opxy::u32)	0	static

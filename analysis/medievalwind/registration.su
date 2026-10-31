@@ -1,0 +1,5 @@
+registration.cpp:23:5:int medievalwind_screen_register()	0	static
+registration.cpp:24:5:int medievalwind_register()	0	static
+registration.cpp:25:5:int medievalwind_record_ready()	0	static
+registration.cpp:26:5:int medievalwind_name_matches(const void*)	0	static
+registration.cpp:27:5:int medievalwind_ready()	0	static

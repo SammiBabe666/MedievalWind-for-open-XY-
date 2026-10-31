@@ -1,0 +1,2 @@
+note_activity.cpp:12:22:opxy::u32 sdk_note_off(opxy::u32, opxy::u32)	0	static
+note_activity.cpp:22:17:void sdk_display_note_activity(opxy::u32, opxy::draw::Input*)	0	static

@@ -1,0 +1,12 @@
+lfo.cpp:6:19:const opxy::platform::LfoMachine* {anonymous}::machine(opxy::u32)	0	static
+lfo.cpp:28:6:bool {anonymous}::extra_icon(opxy::u32, opxy::u32)	0	static
+lfo.cpp:18:5:opxy::u32 {anonymous}::target_count(opxy::u32, opxy::u32)	0	static
+lfo.cpp:52:5:opxy::u32 sdk_lfo_icon_slot(opxy::u32, opxy::u32)	0	static
+lfo.cpp:38:5:opxy::u32 sdk_lfo_range(opxy::u32, opxy::u32, opxy::u32)	0	static
+lfo.cpp:46:5:opxy::u32 sdk_lfo_icon_slide(opxy::u32, opxy::u32, opxy::i32, opxy::u32, opxy::u32, opxy::u32)	4	static
+lfo.cpp:52:5:opxy::u32 sdk_lfo_icon_slot(opxy::u32, opxy::u32)	0	static
+lfo.cpp:59:13:const char* sdk_lfo_label(opxy::u32, opxy::u32, opxy::u32)	8	static
+lfo.cpp:71:5:opxy::u32 sdk_lfo_cycle(opxy::u32, opxy::u32, opxy::u32, opxy::i32)	0	static
+lfo.cpp:85:13:const char* sdk_lfo_element_label(opxy::u32, opxy::u32, opxy::u32, opxy::u32)	8	static
+lfo.cpp:90:5:opxy::i32 sdk_lfo_step(opxy::u32, opxy::u32, opxy::i32, const i32*)	4	static
+lfo.cpp:111:6:void sdk_lfo_modulate(opxy::u32, opxy::u32, opxy::u32, opxy::i32, opxy::u32)	0	static

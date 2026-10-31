@@ -1,0 +1,4 @@
+display.cpp:269:13:void medievalwind::display(medievalwind::DisplayState&, const opxy::draw::Input&, medievalwind::Frame&)	288	static
+display_binding.cpp:23:17:void medievalwind_display_reset(opxy::binding::DisplayState*, opxy::binding::Frame*)	0	static
+display_binding.cpp:27:17:void medievalwind_display_render(opxy::binding::DisplayState*, const opxy::draw::Input*, opxy::binding::Frame*)	0	static
+display_binding.cpp:31:21:unsigned int medievalwind_display_validate(const Frame*)	0	static

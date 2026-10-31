@@ -1,0 +1,6 @@
+startup.cpp:33:5:int kit_absent()	0	static
+startup.cpp:37:6:void sdk_startup_synth()	0	static
+startup.cpp:45:6:void sdk_startup_screen()	0	static
+startup.cpp:52:5:opxy::u32 extensions_catalog_checked(void*, const void*, opxy::u32)	0	static
+startup.cpp:60:5:int sdk_screen_owned(opxy::u32)	0	static
+startup.cpp:68:5:int sdk_engine_installed(const void*)	0	static

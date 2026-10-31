@@ -1,0 +1,11 @@
+stock_browser.cpp:10:6:void opxy::platform::stock_browser::detail::{anonymous}::noop(opxy::platform::stock_browser::detail::Delegate*)	0	static
+stock_browser.cpp:11:5:opxy::u32 opxy::platform::stock_browser::detail::{anonymous}::no(opxy::platform::stock_browser::detail::Delegate*)	0	static
+stock_browser.cpp:12:5:opxy::u32 opxy::platform::stock_browser::detail::{anonymous}::key(opxy::platform::stock_browser::detail::Delegate*, const u32*)	0	static
+stock_browser.cpp:13:6:void opxy::platform::stock_browser::detail::{anonymous}::highlight(opxy::platform::stock_browser::detail::Delegate*, opxy::u32, opxy::i32)	0	static
+stock_browser.cpp:18:5:opxy::u32 opxy::platform::stock_browser::detail::{anonymous}::click(opxy::platform::stock_browser::detail::Delegate*, opxy::u32)	0	static
+stock_browser.cpp:27:6:void opxy::platform::stock_browser::detail::{anonymous}::leave(opxy::platform::stock_browser::detail::Delegate*)	0	static
+stock_browser.cpp:36:6:void opxy::platform::stock_browser::detail::{anonymous}::audition(opxy::platform::stock_browser::detail::Delegate*, opxy::i32)	0	static
+stock_browser.cpp:37:6:void opxy::platform::stock_browser::detail::{anonymous}::options(opxy::platform::stock_browser::detail::Vector<opxy::platform::stock_browser::detail::String>*, opxy::platform::stock_browser::detail::Delegate*)	0	static
+stock_browser.cpp:38:6:void opxy::platform::stock_browser::detail::{anonymous}::set_option(opxy::platform::stock_browser::detail::Delegate*, opxy::u32)	0	static
+stock_browser.cpp:43:5:opxy::u32 opxy::platform::stock_browser::detail::{anonymous}::length(const char*)	0	static
+stock_browser.cpp:56:6:bool opxy::platform::stock_browser::detail::open(opxy::platform::stock_browser::detail::Session&, opxy::platform::stock_browser::detail::Row*, opxy::u32, const char*, const char* const*, opxy::u32, opxy::platform::stock_browser::Callbacks)	16	static

@@ -1,0 +1,13 @@
+lfo_stock.cpp:5:5:opxy::u32 opxy::platform::lfo::gui_engine(opxy::u32)	0	static
+lfo_stock.cpp:6:5:opxy::u32 opxy::platform::lfo::audio_engine(opxy::u32)	0	static
+lfo_stock.cpp:7:5:opxy::u32 opxy::platform::lfo::type(opxy::u32)	0	static
+lfo_stock.cpp:8:5:opxy::u32 opxy::platform::lfo::selected_track()	0	static
+lfo_stock.cpp:9:5:opxy::u32 opxy::platform::lfo::animate(opxy::u32, opxy::u32, opxy::i32, opxy::u32)	0	static
+lfo_stock.cpp:12:13:const char* opxy::platform::lfo::name(opxy::u32, opxy::u32, opxy::u32)	0	static
+lfo_stock.cpp:15:6:void opxy::platform::lfo::show(opxy::u32)	0	static
+lfo_stock.cpp:16:5:opxy::u32 opxy::platform::lfo::group_value(opxy::u32)	0	static
+lfo_stock.cpp:19:5:opxy::i32 opxy::platform::lfo::step(opxy::u32, opxy::u32, opxy::i32, const i32*)	0	static
+lfo_stock.cpp:22:5:opxy::i32 opxy::platform::lfo::value(opxy::u32, opxy::u32, opxy::u32)	0	static
+lfo_stock.cpp:25:5:opxy::u32 opxy::platform::lfo::publish(opxy::u32, opxy::u32, opxy::u32, opxy::i32)	0	static
+lfo_stock.cpp:28:6:void opxy::platform::lfo::modulation_slot(opxy::u32)	0	static
+lfo_stock.cpp:33:6:void opxy::platform::lfo::modulate(opxy::u32, opxy::u32, opxy::u32, opxy::i32)	0	static
